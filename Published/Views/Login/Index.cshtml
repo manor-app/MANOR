@@ -1,0 +1,202 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@{
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>MANOFR</title>
+    <link rel="shortcut icon" type="image" href="" />
+    <meta name="description" content="NFR Application">
+    <meta name="author" content="Mustafa Gamal">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- My CSS Imports -->
+    <link rel="stylesheet" href="~/Content/Bootstrap-v4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/Font-Awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/Style.css">
+    <!-- My Script Imports -->
+    <script src="~/Scripts/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/Bootstrap-v4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background: url('/Content/Images/bg8.jpg');
+            /*background: linear-gradient(to bottom, rgba(100, 100, 100, 0.12), rgba(0, 0, 0, 0.53)),
+                    url('../Images/bg7.jpg');*/
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        html {
+            overflow: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #loginCont {
+            background: linear-gradient(to bottom, rgba(29, 68, 87),rgba(29, 68, 87,0.5),rgba(29, 68, 87,0.0));
+            min-width: 300px;
+            width: 50%;
+            margin: 20vh auto;
+            height: 40%;
+            min-height: 300px;
+            text-align: center;
+            border-top-right-radius: 40px;
+            border-top-left-radius: 40px;
+            box-shadow: 0px -10px 15px -6px rgba(0,0,0,0.6);
+        }
+
+        input {
+            border-radius: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        label {
+            color: #eee;
+            text-shadow: 0px 0px 5px black;
+        }
+
+        h1 {
+            color: #eee;
+            text-shadow: 0px 0px 10px black;
+            padding-top: 20px;
+        }
+
+        hr {
+            width: 70%;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Content -->
+    <div class="container" style="width:100vw;height: 100vh;">
+        <div id="loginCont" class="" style="">
+            <h1>MANOFR</h1>
+            <hr>
+            <label for="username">Username</label>
+            <input autocomplete="on" name="username" id="username" style="border-radius: 20px;" type="text" placeholder="xxxxxx@xxxx.xxx" class="form-control form-control-sm col-md-6 offset-md-3">
+
+            <label>Password</label>
+            <input id="password" style="border-radius: 20px;" type="password" placeholder="****" class="form-control form-control-sm col-md-6 offset-md-3">
+            <button id="loginBtn" type="submit" onclick="authUser();" style="border-radius: 20px;padding: 5px 20px;opacity: 0.9;" class="btn btn-sm btn-success">Login</button><br>
+            <a onclick="resetUserPassword();" href="#" style="font-size: 11px;opacity: 0.7;color: dodgerblue;">Forgot Your Password?</a>
+        </div>
+    </div>
+    <!-- Content -->
+    <!-- My JS Script -->
+    <!--<script type="text/javascript" src="js/Script.js" ></script>-->
+    <!-- My JS Script -->
+</body>
+</html>
+
+<script type="text/javascript">
+
+    function resetUserPassword() {
+
+        var email = $('#username').val();
+
+        if (email == "" || email == null) {
+            alert("Put your credentials!");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Login/ResetUserPassword",
+            data: "{'userEmail': '" + email + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + "\nMail Status: " + dataObject.errorMsg);
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+
+    }
+
+    function newPasswordPrompt() {
+        let newPassConfirm = prompt("This is your default password,\nEnter new password or cancel to proceed.", "");
+        var userCancelled = false;
+        var newPassword;
+        if (newPassConfirm == null || newPassConfirm == "") {
+            userCancelled = true;
+            window.location = "/Home";
+        } else {
+            newPassword = newPassConfirm;
+            var email = $('#username').val();
+            $.ajax({
+                type: "POST",
+                url: "/Login/SubmitUserNewPassword",
+                data: "{'userEmail': '" + email + "', 'userPWD' : '" + newPassword + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "JSON",
+                success: function (dataObject) {
+                    if (dataObject.successFlag) {
+                        window.location = "/Home";
+                    } else {
+                        alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        }
+    }
+
+    function authUser() {
+        var username = $('#username').val();
+        var password = $('#password').val();
+
+        if (username === "" || password === "") {
+            alert("Put Email And Password!");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Login/AuthenticateUser",
+            data: "{'username': '" + username + "', 'pwd' : '" + password + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    if (dataObject.returnedObject.FirstTimeLogin) {
+                        newPasswordPrompt();
+                    } else {
+                        window.location = "/Home";
+                    }
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    $(document).on("keypress", "input", function (e) {
+        if (e.which == 13) {
+            authUser();
+        }
+    });
+
+</script>
+

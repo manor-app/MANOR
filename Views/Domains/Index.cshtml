@@ -1,0 +1,207 @@
+﻿
+@{
+    ViewBag.Title = "Domains";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" id="pageContent">
+    <div class="col-md-10 offset-md-1" style="padding: 50px 0;">
+        <fieldset>
+            <legend>Search Domains:</legend>
+            <div class="col-md-12">
+                <div class="row p-4">
+                    <div class="col-md-3 offset-md-1 text-right">
+                        <label>Domain Category:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input id="srchTxtDomain" type="text" class="form-control form-control-sm" placeholder="IT industry, E-commerce ... etc" />
+                    </div>
+
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="getDomainsList();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Search</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="table-responsive" style="max-height:45vh;">
+                        <div class="Table-Pagination">
+                            <div class="TP-Row">
+                                <div class="TP-PageIndex-Container">
+                                    <label>Page:</label>
+                                    <select></select>
+                                </div>
+                                <div class="TP-IPP-Container">
+                                    <label>Items Per Page:</label>
+                                    <select></select>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col" hidden>#</th>
+                                    <th scope="col">Domain</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dlTableBody">
+                            </tbody>
+                        </table>
+                        <button class="btn btn-sm btn-success m-2" onclick="tableToExcel($(this).prev()[0], 'Domains');">Export</button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Add Domain:</legend>
+            <div class="col-md-12">
+                <div class="row p-3">
+                    <div class="col-md-3 offset-md-1 text-right">
+                        <label><span class="mandatoryStar">*</span>Domain Category:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input id="addTxtDomain" type="text" class="form-control form-control-sm" placeholder="IT industry, E-commerce ... etc" />
+                    </div>
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="addNewDomain();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Add</button>
+                    </div>
+                </div>
+                <div class="p-2"></div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<script>
+
+    var tmpDomainsList = new Array();
+
+    function addNewDomain() {
+        var domain = $("#addTxtDomain").val();
+
+        if (domain === "") {
+            alert("Insert Mandatory Fields!!!");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Domains/AddDomain",
+            data: "{'domain': '" + domain + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    $("#addTxtDomain").val("");
+                    getDomainsList();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getDomainsList() {
+        var domain = $("#srchTxtDomain").val();
+
+        $("#dlTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Domains/GetDomainsList",
+            data: "{'domain': '" + domain + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                tmpDomainsList = new Array();
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        tmpDomainsList[i] = { "ID": dataObject.returnedObject[i].ID, "Domain": dataObject.returnedObject[i].Domain };
+                        $("#dlTableBody").append("<tr><th scope= 'row' hidden>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].Domain + "</td> " +
+                            "<td><button class='btn btn-sm btn-primary' onclick='updateDomain(" + i + ");'>Update</button> <button class='btn btn-sm btn-danger'  onclick='deleteDomain(" + i + ");'>Delete</button></td>" +
+                            "</tr>");
+                    }
+
+                   $('.Table-Pagination')[0].UpdateTablePagination();
+
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function updateDomain(index) {
+        var domainID = tmpDomainsList[index].ID;
+        var domainText = tmpDomainsList[index].Domain;
+
+        let updatedDomain = prompt("Modify The Domain Name Below:", domainText);
+        if (updatedDomain == null || updatedDomain == "" || updatedDomain == domainText) {
+            return;
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/Domains/UpdateDomain",
+                data: "{'domainID':" + domainID + ", 'newDomainText':'" + updatedDomain + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "JSON",
+                success: function (dataObject) {
+                    if (dataObject.successFlag) {
+                        alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                        getDomainsList();
+                    } else {
+                        alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        }
+    }
+
+    function deleteDomain(index) {
+        var domainID = tmpDomainsList[index].ID;
+        var domainText = tmpDomainsList[index].Domain;
+
+        let deletedDomain = confirm("Confirm Deleting The Domain:\n\"" + domainText + "\" With The ID \"" + domainID + "\"");
+        if (!deletedDomain) {
+            return;
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/Domains/DeleteDomain",
+                data: "{'domainID':" + domainID + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "JSON",
+                success: function (dataObject) {
+                    if (dataObject.successFlag) {
+                        alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                        getDomainsList();
+                    } else {
+                        alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        }
+    }
+
+    $('document').ready(function () {
+        $('.nav a').removeClass("active");
+        $('#navItemDomains').addClass("active");
+
+        getDomainsList();
+    });
+</script>

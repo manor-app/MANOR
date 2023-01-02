@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 22.75, 19.125" name="ManofrSqlDbModel">
+  <DataContextMoniker Name="/ManofrSqlDbModelDataContext" />
+  <nestedChildShapes>
+    <classShape Id="eadbcc4c-906e-4f6f-a7b3-fa1e6654bb73" absoluteBounds="0.75, 12.375, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/ApplicationsType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eeda636c-eeb3-46be-b5bd-38c3c2dbcd4e" absoluteBounds="0.765, 12.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b4a1a9ac-805d-4be1-a300-735879497598" absoluteBounds="0.75, 9.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/ComponentsStatus" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3e019fee-14a0-46f6-a2bf-318c2629bfa9" absoluteBounds="0.765, 10.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d8f6b46c-df4e-43f9-a91f-898d547c7656" absoluteBounds="0.75, 7.375, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/Domain" />
+      <nestedChildShapes>
+        <elementListCompartment Id="58167cbe-8360-47ee-89da-09eab41754f2" absoluteBounds="0.765, 7.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="02e2d126-fedd-4a69-859b-e327b121918b" absoluteBounds="6.5, 14.625, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/Module" />
+      <nestedChildShapes>
+        <elementListCompartment Id="90ae3ec5-483d-4694-9bb6-b82a40d74e07" absoluteBounds="6.515, 15.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" absoluteBounds="3.5, 8.625, 2, 3.5016097005208344">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/Project" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e9e56fd2-9a3a-4ab5-be94-230394b192d5" absoluteBounds="3.515, 9.085, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f3a9d455-7185-4228-b155-7ef76fad0730" absoluteBounds="6.25, 9.625, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/ProjectsModule" />
+      <nestedChildShapes>
+        <elementListCompartment Id="70731346-a3c7-409a-98ca-5c6ff654d5ba" absoluteBounds="6.265, 10.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a2e078fc-540a-4779-a6f2-ca172d8c181e" absoluteBounds="6.25, 11.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/ProjectsNFR" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a7c7d5c8-62d0-4494-81ea-301d82151362" absoluteBounds="6.265, 12.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="52f0b080-bc99-4064-8354-64eca752ad91" absoluteBounds="6.25, 6.625, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/ProjectsUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="08eaa790-187f-4e04-b2f6-94997070c395" absoluteBounds="6.265, 7.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="075a02a0-87bb-4456-9c24-d25ce8dacd21" absoluteBounds="9.25, 6, 2, 2.5401025390624996">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/Sprint" />
+      <nestedChildShapes>
+        <elementListCompartment Id="12e0d064-2d5b-4e70-b73b-4b839c126a5d" absoluteBounds="9.265, 6.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="32ecfa6a-b57d-4e55-9822-631770e63db2" absoluteBounds="0.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/SystemNFR" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b0c6c281-cfdc-40a0-adaf-49334814b6ef" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2ccc3aa0-ae62-41bb-881a-021888665b23" absoluteBounds="17.75, 8, 2, 3.3093082682291666">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/Task" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b840270a-c298-48c9-9f39-5e5e74570f17" absoluteBounds="17.765, 8.46, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="57b2d3b1-4dff-42eb-81c9-f5ee51aa5d14" absoluteBounds="20.5, 8.875, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/Tasks_Assigned_User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a3fc0e90-0e6b-40e3-b302-9a82998a6883" absoluteBounds="20.515, 9.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c483c61b-e4ea-41aa-93bc-b6dfcbfa807d" absoluteBounds="9.25, 4, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/US_Positivity" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4c7a251f-95ce-4aed-8dfa-a96e25f29336" absoluteBounds="9.265, 4.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="11c2d58b-178e-4280-aef9-ade9691c2f85" absoluteBounds="9.25, 11.875, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/US_Priority" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5209ea47-ee29-4900-97b2-d085f4a03d14" absoluteBounds="9.265, 12.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="465b89e5-effb-4d7b-8888-2836397d74aa" absoluteBounds="9.25, 15.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/US_Relation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8dac9753-0a31-42b7-902e-7a051e83b986" absoluteBounds="9.265, 16.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="98514f90-dd03-4aa2-a61b-d6b9551dd001" absoluteBounds="9.25, 2, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/US_Requirement_Type" />
+      <nestedChildShapes>
+        <elementListCompartment Id="57cffd53-29cd-4019-b64b-2e11f7257abd" absoluteBounds="9.265, 2.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2eca35b7-c24f-4479-aaee-7cb1747d600b" absoluteBounds="9.25, 13.875, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/US_Type" />
+      <nestedChildShapes>
+        <elementListCompartment Id="86249cb4-7c62-44f2-a726-253b48aaee29" absoluteBounds="9.265, 14.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="524b04c7-981d-4a93-9889-19253dd7d863" absoluteBounds="0.75, 14.25, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="738adc97-7f6a-4d19-9c71-62e48b74914f" absoluteBounds="0.765, 14.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="50c96bff-c9a3-4e48-8e83-f629f631db1d" absoluteBounds="0.75, 2.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/UsersNFR" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3b8844b1-7f28-49e5-b2bc-5f882936329f" absoluteBounds="0.765, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5a337aa4-3898-478f-85ab-a62fac6c1661" absoluteBounds="1.5, 17.625, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/UsersTitle" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bac5433a-c6c4-45f1-8c51-09adbdd33526" absoluteBounds="1.5150000000000001, 18.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b63b413d-559f-47b3-8d07-bb841749a301" absoluteBounds="12, 6.625, 2, 6.0015283203124987">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/UserStory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="582c9ab7-e524-47f0-beab-73406e069280" absoluteBounds="12.015, 7.085, 1.9700000000000002, 5.4415283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fe715b85-5410-4737-8784-39e7598a7079" absoluteBounds="14.75, 8.875, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/UserStory_Assigned_User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="087a7300-c3bc-48a7-b088-c6e8c6b580ae" absoluteBounds="14.765, 9.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b577f142-9b5d-4743-9cb6-354b8a8103aa" absoluteBounds="14.75, 11, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/UserStory_Related_Story" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2474a42b-94dd-43b2-a1a8-b07a3bb081c4" absoluteBounds="14.765, 11.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 8.32139322916667); (3.04166666666667 : 8.32139322916667 : JumpStart); (3.20833333333333 : 8.32139322916667 : JumpEnd); (3.88541416666667 : 8.32139322916667 : JumpStart); (4.05208083333333 : 8.32139322916667 : JumpEnd); (4.41666666666667 : 8.32139322916667 : JumpStart); (4.58333333333333 : 8.32139322916667 : JumpEnd); (4.94791916666667 : 8.32139322916667 : JumpStart); (5.11458583333333 : 8.32139322916667 : JumpEnd); (8.3749975 : 8.32139322916667); (8.3749975 : 14.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Domain/Domain_Module" />
+      <nodes>
+        <classShapeMoniker Id="d8f6b46c-df4e-43f9-a91f-898d547c7656" />
+        <classShapeMoniker Id="02e2d126-fedd-4a69-859b-e327b121918b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.81694411458333); (3.04166666666667 : 7.81694411458333 : JumpStart); (3.20833333333333 : 7.81694411458333 : JumpEnd); (3.88541416666667 : 7.81694411458333 : JumpStart); (4.05208083333333 : 7.81694411458333 : JumpEnd); (4.5 : 7.81694411458333); (4.5 : 8.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Domain/Domain_Project" />
+      <nodes>
+        <classShapeMoniker Id="d8f6b46c-df4e-43f9-a91f-898d547c7656" />
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 10.3469962565104); (3.04166666666667 : 10.3469962565104 : JumpStart); (3.20833333333333 : 10.3469962565104 : JumpEnd); (3.5 : 10.3469962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/ComponentsStatus/ComponentsStatus_Project" />
+      <nodes>
+        <classShapeMoniker Id="b4a1a9ac-805d-4be1-a300-735879497598" />
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 12.9719962565104); (4.5 : 12.9719962565104); (4.5 : 12.1266097005208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/ApplicationsType/ApplicationsType_Project" />
+      <nodes>
+        <classShapeMoniker Id="eadbcc4c-906e-4f6f-a7b3-fa1e6654bb73" />
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.5 : 14.625); (6.43392556509888 : 14.5589255650989 : JumpStart); (6.31607443490112 : 14.4410744349011 : JumpEnd); (6.30892556509888 : 14.4339255650989 : JumpStart); (6.12857443490112 : 14.2535744349011 : JumpEnd); (6.125 : 14.25); (6.08333333333333 : 14.25 : JumpStart); (5.91666666666667 : 14.25 : JumpEnd); (5.875 : 14.25); (5.875 : 11.3862939453125); (6.25 : 11.0112939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Module/Module_ProjectsModule" />
+      <nodes>
+        <classShapeMoniker Id="02e2d126-fedd-4a69-859b-e327b121918b" />
+        <classShapeMoniker Id="f3a9d455-7185-4228-b155-7ef76fad0730" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 10.2868944726563); (5.91666666666667 : 10.2868944726563 : JumpStart); (6.08333333333333 : 10.2868944726563 : JumpEnd); (6.25 : 10.2868944726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Project/Project_ProjectsModule" />
+      <nodes>
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+        <classShapeMoniker Id="f3a9d455-7185-4228-b155-7ef76fad0730" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 11.9383048502604); (5.79166666666667 : 11.9383048502604 : JumpStart); (5.95833333333333 : 11.9383048502604 : JumpEnd); (6.25 : 11.9383048502604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Project/Project_ProjectsNFR" />
+      <nodes>
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+        <classShapeMoniker Id="a2e078fc-540a-4779-a6f2-ca172d8c181e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.0312525 : 8.625); (5.0312525 : 7.22097205729167); (6.25 : 7.22097205729167)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Project/Project_ProjectsUser" />
+      <nodes>
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+        <classShapeMoniker Id="52f0b080-bc99-4064-8354-64eca752ad91" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.9687475 : 8.625); (3.9687475 : 6.28125); (9.25 : 6.28125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Project/Project_Sprint" />
+      <nodes>
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+        <classShapeMoniker Id="075a02a0-87bb-4456-9c24-d25ce8dacd21" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 10.3469962565104); (3.04166666666667 : 10.3469962565104 : JumpStart); (3.20833333333333 : 10.3469962565104 : JumpEnd); (3.25 : 10.3469962565104); (3.25 : 8.5); (3.88541416666667 : 8.5 : JumpStart); (4.05208083333333 : 8.5 : JumpEnd); (4.41666666666667 : 8.5 : JumpStart); (4.58333333333333 : 8.5 : JumpEnd); (4.94791916666667 : 8.5 : JumpStart); (5.11458583333333 : 8.5 : JumpEnd); (8.29166416666667 : 8.5 : JumpStart); (8.45833083333333 : 8.5 : JumpEnd); (9 : 8.5); (9 : 8.6651025390625); (9.04166666666667 : 8.6651025390625 : JumpStart); (9.20833333333333 : 8.6651025390625 : JumpEnd); (10.25 : 8.6651025390625); (10.25 : 8.5401025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/ComponentsStatus/ComponentsStatus_Sprint" />
+      <nodes>
+        <classShapeMoniker Id="b4a1a9ac-805d-4be1-a300-735879497598" />
+        <classShapeMoniker Id="075a02a0-87bb-4456-9c24-d25ce8dacd21" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 10.3758048502604); (6 : 10.3758048502604); (6 : 9.375); (8.29166416666667 : 9.375 : JumpStart); (8.48958333333333 : 9.375 : JumpEnd); (8.79166666666667 : 9.375 : JumpStart); (8.95833333333333 : 9.375 : JumpEnd); (11.75 : 9.375); (11.75 : 6.375); (12.3854141666667 : 6.375 : JumpStart); (12.5520808333333 : 6.375 : JumpEnd); (12.9166666666667 : 6.375 : JumpStart); (13.0833333333333 : 6.375 : JumpEnd); (18.1354146666667 : 6.375 : JumpStart); (18.3020813333333 : 6.375 : JumpEnd); (18.5338536666667 : 6.375 : JumpStart); (18.7005203333333 : 6.375 : JumpEnd); (19.015626 : 6.375); (19.015626 : 8)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Project/Project_Task" />
+      <nodes>
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+        <classShapeMoniker Id="2ccc3aa0-ae62-41bb-881a-021888665b23" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 10.0172461282552); (3.04166666666667 : 10.0172461282552 : JumpStart); (3.33333333333333 : 10.0172461282552 : JumpEnd); (3.375 : 10.0172461282552); (3.375 : 8.4375); (3.88541416666667 : 8.4375 : JumpStart); (4.05208083333333 : 8.4375 : JumpEnd); (4.41666666666667 : 8.4375 : JumpStart); (4.58333333333333 : 8.4375 : JumpEnd); (4.94791916666667 : 8.4375 : JumpStart); (5.11458583333333 : 8.4375 : JumpEnd); (8.29166416666667 : 8.4375 : JumpStart); (8.45833083333333 : 8.4375 : JumpEnd); (8.75 : 8.4375); (8.75 : 9.0401025390625); (8.79166666666667 : 9.0401025390625 : JumpStart); (8.95833333333333 : 9.0401025390625 : JumpEnd); (9.04166666666667 : 9.0401025390625 : JumpStart); (9.20833333333333 : 9.0401025390625 : JumpEnd); (11.5 : 9.0401025390625); (11.5 : 6.125); (12.3854141666667 : 6.125 : JumpStart); (12.5520808333333 : 6.125 : JumpEnd); (12.9166666666667 : 6.125 : JumpStart); (13.0833333333333 : 6.125 : JumpEnd); (18.1354146666667 : 6.125 : JumpStart); (18.3020813333333 : 6.125 : JumpEnd); (18.617187 : 6.125); (18.617187 : 8)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/ComponentsStatus/ComponentsStatus_Task" />
+      <nodes>
+        <classShapeMoniker Id="b4a1a9ac-805d-4be1-a300-735879497598" />
+        <classShapeMoniker Id="2ccc3aa0-ae62-41bb-881a-021888665b23" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(19.75 : 9.56814697265625); (20.5 : 9.56814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Task/Task_Tasks_Assigned_User" />
+      <nodes>
+        <classShapeMoniker Id="2ccc3aa0-ae62-41bb-881a-021888665b23" />
+        <classShapeMoniker Id="57b2d3b1-4dff-42eb-81c9-f5ee51aa5d14" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 12.9727604166667); (12.1197879166667 : 12.9727604166667 : JumpStart); (12.2864545833333 : 12.9727604166667 : JumpEnd); (12.3854141666667 : 12.9727604166667 : JumpStart); (12.5520808333333 : 12.9727604166667 : JumpEnd); (12.9166666666667 : 12.9727604166667 : JumpStart); (13.0833333333333 : 12.9727604166667 : JumpEnd); (13.4479186666667 : 12.9727604166667 : JumpStart); (13.6145853333333 : 12.9727604166667 : JumpEnd); (14.4166666666667 : 12.9727604166667 : JumpStart); (14.5833333333333 : 12.9727604166667 : JumpEnd); (18.2187475 : 12.9727604166667); (18.2187475 : 11.3093082682292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/US_Priority/US_Priority_Task" />
+      <nodes>
+        <classShapeMoniker Id="11c2d58b-178e-4280-aef9-ade9691c2f85" />
+        <classShapeMoniker Id="2ccc3aa0-ae62-41bb-881a-021888665b23" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 2.59699625651042); (18.218748 : 2.59699625651042); (18.218748 : 8)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/US_Requirement_Type/US_Requirement_Type_Task" />
+      <nodes>
+        <classShapeMoniker Id="98514f90-dd03-4aa2-a61b-d6b9551dd001" />
+        <classShapeMoniker Id="2ccc3aa0-ae62-41bb-881a-021888665b23" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 15.2315991210937); (3.9687475 : 15.2315991210937); (3.9687475 : 12.1266097005208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/User/User_Project" />
+      <nodes>
+        <classShapeMoniker Id="524b04c7-981d-4a93-9889-19253dd7d863" />
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.7182867976262 : 14.25); (3.125 : 13.8432867976262); (3.125 : 7.5502105859375); (3.88541416666667 : 7.5502105859375 : JumpStart); (4.05208083333333 : 7.5502105859375 : JumpEnd); (4.94791916666667 : 7.5502105859375 : JumpStart); (5.11458583333333 : 7.5502105859375 : JumpEnd); (6.25 : 7.5502105859375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/User/User_ProjectsUser" />
+      <nodes>
+        <classShapeMoniker Id="524b04c7-981d-4a93-9889-19253dd7d863" />
+        <classShapeMoniker Id="52f0b080-bc99-4064-8354-64eca752ad91" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 14.25); (3.125 : 13.875); (3.88541416666667 : 13.875 : JumpStart); (4.05208083333333 : 13.875 : JumpEnd); (5.79166666666667 : 13.875 : JumpStart); (6.45833333333333 : 13.875 : JumpEnd); (8.29166416666667 : 13.875 : JumpStart); (8.52083583333333 : 13.875 : JumpEnd); (8.875 : 13.875); (8.875 : 8.9151025390625); (9.06607443490112 : 8.72402810416138 : JumpStart); (9.18392556509888 : 8.60617697396362 : JumpEnd); (9.25 : 8.5401025390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/User/User_Sprint" />
+      <nodes>
+        <classShapeMoniker Id="524b04c7-981d-4a93-9889-19253dd7d863" />
+        <classShapeMoniker Id="075a02a0-87bb-4456-9c24-d25ce8dacd21" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 15.7536506816406); (5.91666666666667 : 15.7536506816406 : JumpStart); (6.08333333333333 : 15.7536506816406 : JumpEnd); (6.25 : 15.7536506816406); (6.25 : 13.625); (6.29166666666667 : 13.625 : JumpStart); (6.45833333333333 : 13.625 : JumpEnd); (8.29166416666667 : 13.625 : JumpStart); (8.52083583333333 : 13.625 : JumpEnd); (8.79166666666667 : 13.625 : JumpStart); (8.95833333333333 : 13.625 : JumpEnd); (12.1197879166667 : 13.625 : JumpStart); (12.2864545833333 : 13.625 : JumpEnd); (12.3854141666667 : 13.625 : JumpStart); (12.5520808333333 : 13.625 : JumpEnd); (19.281252 : 13.625); (19.281252 : 11.3093082682292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/User/User_Task" />
+      <nodes>
+        <classShapeMoniker Id="524b04c7-981d-4a93-9889-19253dd7d863" />
+        <classShapeMoniker Id="2ccc3aa0-ae62-41bb-881a-021888665b23" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 14.7574107379808); (3.88541416666667 : 14.7574107379808 : JumpStart); (4.05208083333333 : 14.7574107379808 : JumpEnd); (5.91666666666667 : 14.7574107379808 : JumpStart); (6.33333333333333 : 14.7574107379808 : JumpEnd); (6.375 : 14.7574107379808); (6.375 : 13.375); (8.29166416666667 : 13.375 : JumpStart); (8.52083583333333 : 13.375 : JumpEnd); (8.79166666666667 : 13.375 : JumpStart); (8.95833333333333 : 13.375 : JumpEnd); (12.1197879166667 : 13.375 : JumpStart); (12.2864545833333 : 13.375 : JumpEnd); (12.3854141666667 : 13.375 : JumpStart); (12.5520808333333 : 13.375 : JumpEnd); (12.9166666666667 : 13.375 : JumpStart); (13.0833333333333 : 13.375 : JumpEnd); (13.4479186666667 : 13.375 : JumpStart); (13.6145853333333 : 13.375 : JumpEnd); (14.4166666666667 : 13.375 : JumpStart); (14.5833333333333 : 13.375 : JumpEnd); (18.48437375 : 13.375); (18.48437375 : 11.3093082682292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/User/User_Task1" />
+      <nodes>
+        <classShapeMoniker Id="524b04c7-981d-4a93-9889-19253dd7d863" />
+        <classShapeMoniker Id="2ccc3aa0-ae62-41bb-881a-021888665b23" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 15.4926249013672); (5.91666666666667 : 15.4926249013672 : JumpStart); (6.08333333333333 : 15.4926249013672 : JumpEnd); (6.125 : 15.4926249013672); (6.125 : 13.75); (6.16666666666667 : 13.75 : JumpStart); (6.45833333333333 : 13.75 : JumpEnd); (8.29166416666667 : 13.75 : JumpStart); (8.52083583333333 : 13.75 : JumpEnd); (8.79166666666667 : 13.75 : JumpStart); (8.95833333333333 : 13.75 : JumpEnd); (12.1197879166667 : 13.75 : JumpStart); (12.2864545833333 : 13.75 : JumpEnd); (12.3854141666667 : 13.75 : JumpStart); (12.5520808333333 : 13.75 : JumpEnd); (21.5 : 13.75); (21.5 : 10.2612939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/User/User_Tasks_Assigned_User" />
+      <nodes>
+        <classShapeMoniker Id="524b04c7-981d-4a93-9889-19253dd7d863" />
+        <classShapeMoniker Id="57b2d3b1-4dff-42eb-81c9-f5ee51aa5d14" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.125 : 17.625); (2.125 : 16.2131982421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/UsersTitle/UsersTitle_User" />
+      <nodes>
+        <classShapeMoniker Id="5a337aa4-3898-478f-85ab-a62fac6c1661" />
+        <classShapeMoniker Id="524b04c7-981d-4a93-9889-19253dd7d863" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14 : 8.40625); (17.75 : 8.40625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/UserStory/UserStory_Task" />
+      <nodes>
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+        <classShapeMoniker Id="2ccc3aa0-ae62-41bb-881a-021888665b23" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 16.0146764619141); (6 : 16.0146764619141); (6 : 13.5); (6.29166666666667 : 13.5 : JumpStart); (6.45833333333333 : 13.5 : JumpEnd); (8.29166416666667 : 13.5 : JumpStart); (8.52083583333333 : 13.5 : JumpEnd); (8.79166666666667 : 13.5 : JumpStart); (8.95833333333333 : 13.5 : JumpEnd); (12.1197879166667 : 13.5 : JumpStart); (12.2864545833333 : 13.5 : JumpEnd); (12.3854141666667 : 13.5 : JumpStart); (12.5520808333333 : 13.5 : JumpEnd); (13 : 13.5); (13 : 12.6265283203125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/User/User_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="524b04c7-981d-4a93-9889-19253dd7d863" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.40625 : 14.625); (8.40625 : 8.8526025390625); (8.66666666666667 : 8.8526025390625 : JumpStart); (8.83333333333333 : 8.8526025390625 : JumpEnd); (8.85416666666667 : 8.8526025390625 : JumpStart); (9.02083333333333 : 8.8526025390625 : JumpEnd); (9.04166666666667 : 8.8526025390625 : JumpStart); (9.20833333333333 : 8.8526025390625 : JumpEnd); (11.4166666666667 : 8.8526025390625 : JumpStart); (11.8333333333333 : 8.8526025390625 : JumpEnd); (12 : 8.8526025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Module/Module_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="02e2d126-fedd-4a69-859b-e327b121918b" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 11.78125); (8.29166416666667 : 11.78125 : JumpStart); (8.52083583333333 : 11.78125 : JumpEnd); (8.79166666666667 : 11.78125 : JumpStart); (8.95833333333333 : 11.78125 : JumpEnd); (12 : 11.78125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/ProjectsNFR/ProjectsNFR_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="a2e078fc-540a-4779-a6f2-ca172d8c181e" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 4.59699625651042); (12.3854141666667 : 4.59699625651042 : JumpStart); (12.5520808333333 : 4.59699625651042 : JumpEnd); (13 : 4.59699625651042); (13 : 6.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/US_Positivity/US_Positivity_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="c483c61b-e4ea-41aa-93bc-b6dfcbfa807d" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 11.4611726888021); (8.29166416666667 : 11.4611726888021 : JumpStart); (8.52083583333333 : 11.4611726888021 : JumpEnd); (8.79166666666667 : 11.4611726888021 : JumpStart); (8.95833333333333 : 11.4611726888021 : JumpEnd); (11.2604166666667 : 11.4611726888021 : JumpStart); (11.4270833333333 : 11.4611726888021 : JumpEnd); (12 : 11.4611726888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Project/Project_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 16.4431469726563); (12.4687475 : 16.4431469726563); (12.4687475 : 12.6265283203125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/US_Relation/US_Relation_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="465b89e5-effb-4d7b-8888-2836397d74aa" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 2.92674688476562); (12.4687475 : 2.92674688476562); (12.4687475 : 6.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/US_Requirement_Type/US_Requirement_Type_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="98514f90-dd03-4aa2-a61b-d6b9551dd001" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 7.58255126953125); (11.4166666666667 : 7.58255126953125 : JumpStart); (11.5833333333333 : 7.58255126953125 : JumpEnd); (11.6666666666667 : 7.58255126953125 : JumpStart); (11.8333333333333 : 7.58255126953125 : JumpEnd); (12 : 7.58255126953125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Sprint/Sprint_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="075a02a0-87bb-4456-9c24-d25ce8dacd21" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 9.75); (1.75 : 9.5); (3 : 9.5); (3 : 8.25); (3.04166666666667 : 8.25 : JumpStart); (3.20833333333333 : 8.25 : JumpEnd); (3.88541416666667 : 8.25 : JumpStart); (4.05208083333333 : 8.25 : JumpEnd); (4.41666666666667 : 8.25 : JumpStart); (4.58333333333333 : 8.25 : JumpEnd); (4.94791916666667 : 8.25 : JumpStart); (5.11458583333333 : 8.25 : JumpEnd); (9.125 : 8.25); (9.125 : 9.1651025390625); (11.625 : 9.1651025390625); (11.625 : 7.70754926953125); (11.6666666666667 : 7.70754926953125 : JumpStart); (11.8333333333333 : 7.70754926953125 : JumpEnd); (12 : 7.70754926953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/ComponentsStatus/ComponentsStatus_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="b4a1a9ac-805d-4be1-a300-735879497598" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 14.5203165464243); (3.88541416666667 : 14.5203165464243 : JumpStart); (4.05208083333333 : 14.5203165464243 : JumpEnd); (5.91666666666667 : 14.5203165464243 : JumpStart); (6.27083333333333 : 14.5203165464243 : JumpEnd); (6.3125 : 14.5203165464243); (6.3125 : 13.6875); (8.29166416666667 : 13.6875 : JumpStart); (8.52083583333333 : 13.6875 : JumpEnd); (8.79166666666667 : 13.6875 : JumpStart); (8.95833333333333 : 13.6875 : JumpEnd); (12.1197879166667 : 13.6875 : JumpStart); (12.2864545833333 : 13.6875 : JumpEnd); (12.3854141666667 : 13.6875 : JumpStart); (12.5520808333333 : 13.6875 : JumpEnd); (13.531252 : 13.6875); (13.531252 : 12.6265283203125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/User/User_UserStory1" />
+      <nodes>
+        <classShapeMoniker Id="524b04c7-981d-4a93-9889-19253dd7d863" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 12.2507641601562); (12 : 12.2507641601562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/US_Priority/US_Priority_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="11c2d58b-178e-4280-aef9-ade9691c2f85" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 14.4719962565104); (12.20312125 : 14.4719962565104); (12.20312125 : 12.6265283203125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/US_Type/US_Type_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="2eca35b7-c24f-4479-aaee-7cb1747d600b" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 14.9945049295373); (3.88541416666667 : 14.9945049295373 : JumpStart); (4.05208083333333 : 14.9945049295373 : JumpEnd); (5.91666666666667 : 14.9945049295373 : JumpStart); (6.08333333333333 : 14.9945049295373 : JumpEnd); (6.1875 : 14.9945049295373); (6.1875 : 13.5625); (6.29166666666667 : 13.5625 : JumpStart); (6.45833333333333 : 13.5625 : JumpEnd); (8.29166416666667 : 13.5625 : JumpStart); (8.52083583333333 : 13.5625 : JumpEnd); (8.79166666666667 : 13.5625 : JumpStart); (8.95833333333333 : 13.5625 : JumpEnd); (12.1197879166667 : 13.5625 : JumpStart); (12.2864545833333 : 13.5625 : JumpEnd); (12.3854141666667 : 13.5625 : JumpStart); (12.5520808333333 : 13.5625 : JumpEnd); (13.4479186666667 : 13.5625 : JumpStart); (13.6145853333333 : 13.5625 : JumpEnd); (14.5 : 13.5625); (14.5 : 10.6362939453125); (15.75 : 10.6362939453125); (15.75 : 10.2612939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/User/User_UserStory_Assigned_User" />
+      <nodes>
+        <classShapeMoniker Id="524b04c7-981d-4a93-9889-19253dd7d863" />
+        <classShapeMoniker Id="fe715b85-5410-4737-8784-39e7598a7079" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14 : 9.56814697265625); (14.75 : 9.56814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/UserStory/UserStory_UserStory_Assigned_User" />
+      <nodes>
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+        <classShapeMoniker Id="fe715b85-5410-4737-8784-39e7598a7079" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14 : 11.6931469726562); (14.75 : 11.6931469726562)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/UserStory/UserStory_UserStory_Related_Story" />
+      <nodes>
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+        <classShapeMoniker Id="b577f142-9b5d-4743-9cb6-354b8a8103aa" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14 : 11.2840734863281); (14.4166666666667 : 11.2840734863281 : JumpStart); (14.5833333333333 : 11.2840734863281 : JumpEnd); (14.75 : 11.2840734863281)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/UserStory/UserStory_UserStory_Related_Story1" />
+      <nodes>
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+        <classShapeMoniker Id="b577f142-9b5d-4743-9cb6-354b8a8103aa" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="c8dcfe06-86e5-4634-8362-6d8d8fd49ec7" absoluteBounds="3.375, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/NFR_Rec_AppType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d6732203-6d50-4ca6-b718-9e020a30b924" absoluteBounds="3.39, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="16357cf1-fada-428a-8dae-251b29ba6c77" absoluteBounds="3.375, 3.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/NFR_Rec_Domain" />
+      <nestedChildShapes>
+        <elementListCompartment Id="739bba63-c94c-4c7b-b37d-dbfffe69efbc" absoluteBounds="3.39, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4190e2d0-60e9-4abe-b4dc-bde5b78cfeef" absoluteBounds="9.375, 9.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ManofrSqlDbModelDataContext/Epic" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3d456c6d-d55d-498b-9739-b9b71728c715" absoluteBounds="9.39, 10.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11.375 : 10.4142976888021); (12 : 10.4142976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Epic/Epic_UserStory" />
+      <nodes>
+        <classShapeMoniker Id="4190e2d0-60e9-4abe-b4dc-bde5b78cfeef" />
+        <classShapeMoniker Id="b63b413d-559f-47b3-8d07-bb841749a301" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.4375025 : 14.625); (8.4375025 : 11.1386946614583); (8.79166666666667 : 11.1386946614583 : JumpStart); (8.95833333333333 : 11.1386946614583 : JumpEnd); (9.375 : 11.1386946614583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Module/Module_Epic" />
+      <nodes>
+        <classShapeMoniker Id="02e2d126-fedd-4a69-859b-e327b121918b" />
+        <classShapeMoniker Id="4190e2d0-60e9-4abe-b4dc-bde5b78cfeef" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 11.605588844401); (5.79166666666667 : 11.605588844401 : JumpStart); (5.95833333333333 : 11.605588844401 : JumpEnd); (8.29166416666667 : 11.605588844401 : JumpStart); (8.52083583333333 : 11.605588844401 : JumpEnd); (8.79166666666667 : 11.605588844401 : JumpStart); (8.95833333333333 : 11.605588844401 : JumpEnd); (11.34375 : 11.605588844401); (11.34375 : 11.2035953776042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ManofrSqlDbModelDataContext/Project/Project_Epic" />
+      <nodes>
+        <classShapeMoniker Id="e41a1453-e0b0-4ab9-abe6-8dcda3b1d73a" />
+        <classShapeMoniker Id="4190e2d0-60e9-4abe-b4dc-bde5b78cfeef" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

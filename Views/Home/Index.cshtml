@@ -1,0 +1,276 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid p-0" id="pageContent">
+    <div class="row" style="height:100%;">
+        <div class="col-md-3" style="height:100%;padding: 50px 0px 50px 50px;">
+            <fieldset class="col-md-12" id="ProjectsList">
+                <legend class="" id="psTitle">PROJECTS <i onclick="window.location = '/Project/CreateProject'" title="Create New Project" id="addProjFromHome" class="fa fa-plus"></i></legend>
+                <div class="col-md-12" id="psLinks">
+                    <ul id="homeProjectsList">
+                    </ul>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-md-9 p-5" style="height: 100%; padding-top:0px;">
+            <fieldset style="height: 50%; width: 100%; padding: 0; overflow: hidden;">
+                <legend>TimeLine</legend>
+                <div id="uce-BubbleChart-Container" style="margin-top:-10px;"></div>
+            </fieldset>
+            <fieldset style="height:50%;overflow:hidden;overflow-y:auto;">
+                <legend>Dashboard</legend>
+                <div class="col-md-10 offset-md-1" style="height:95%;">
+                    <div id="ais-chart" style="width: 100%; height: 100%;"></div>
+                </div>
+                <hr style="width:80%;" />
+                <div class="col-md-10 offset-md-1" style="height:95%;">
+                    <div class="row p-0" style="height:100%;">
+                        <div class="col-md-6 p-0">
+                            <div id="top-nfrs-chart" style="width: 100%; height: 40vh;"></div>
+                        </div>
+                        <div class="col-md-6 p-0">
+                            <div id="sys-types-chart" style="width: 100%; height: 40vh;"></div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<style>
+    div.google-visualization-tooltip {
+       min-width:200px;margin-top:50px;
+    }
+    #uce-BubbleChart-Container {
+        width: 100%;
+        height:100%;
+    }
+    circle, text {
+        cursor: pointer;
+    }
+</style>
+<script>
+
+    var aisData = 0;
+    var aisOptions = 0;
+    var aisChart = 0;
+    var topNfrsData = 0;
+    var topNfrsOptions = 0;
+    var topNfrsChart = 0;
+    var sysTypesData = 0;
+    var sysTypesOptions = 0;
+    var sysTypesChart = 0;
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawAisVisualization);
+    google.charts.setOnLoadCallback(drawTopNfrsChart);
+    google.charts.setOnLoadCallback(drawSysTypesChart);
+
+    function drawSysTypesChart() {
+
+        $.ajax({
+            type: "GET",
+            url: "/Reports/Generate_Dashboard_PBST_Report",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                   
+                    sysTypesData = new google.visualization.DataTable();
+                    sysTypesData.addColumn('string', 'System Type');
+                    sysTypesData.addColumn('number', 'Count');
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                        sysTypesData.addRows([
+                            [dataObject.returnedObject[i].Name, dataObject.returnedObject[i].Count]
+                        ]);
+                    }
+
+                    sysTypesOptions = {
+                        title: 'Projects By System Type',
+                        backgroundColor: {
+                            fill: '#fff',
+                            fillOpacity: 0
+                        }
+                    };
+
+                    sysTypesChart = new google.visualization.PieChart(document.getElementById('sys-types-chart'));
+                    sysTypesChart.draw(sysTypesData, sysTypesOptions);
+
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+
+    }
+
+    function drawTopNfrsChart() {
+
+        $.ajax({
+            type: "GET",
+            url: "/Reports/Generate_Dashboard_TFNFRS_Report",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+
+                    topNfrsData = new google.visualization.DataTable();
+                    topNfrsData.addColumn('string', 'NFR');
+                    topNfrsData.addColumn('number', 'Count');
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                        topNfrsData.addRows([
+                            [dataObject.returnedObject[i], dataObject.extraObject[i]]
+                        ]);
+                    }
+
+                    topNfrsOptions = {
+                        title: 'Top 5 Non-Functional Requirements',
+                        backgroundColor: {
+                            fill: '#fff',
+                            fillOpacity: 0
+                        }
+                    };
+
+                    topNfrsChart = new google.visualization.PieChart(document.getElementById('top-nfrs-chart'));
+                    topNfrsChart.draw(topNfrsData, topNfrsOptions);
+
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function drawAisVisualization() {
+
+        $.ajax({
+            type: "GET",
+            url: "/Reports/Generate_Dashboard_ASIS_Report",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    // Some raw data (not necessarily accurate)
+                    aisData = google.visualization.arrayToDataTable([
+                        ['Item', 'Open', 'Overdue', 'Pending', 'Closed', 'In-Progress', 'Average'],
+                        [dataObject.returnedObject[0].ItemName, dataObject.returnedObject[0].StatusMap["Open"], dataObject.returnedObject[0].StatusMap["Overdue"], dataObject.returnedObject[0].StatusMap["Pending"], dataObject.returnedObject[0].StatusMap["Closed"], dataObject.returnedObject[0].StatusMap["In-Progress"], dataObject.returnedObject[0].AVG],
+                        [dataObject.returnedObject[1].ItemName, dataObject.returnedObject[1].StatusMap["Open"], dataObject.returnedObject[1].StatusMap["Overdue"], dataObject.returnedObject[1].StatusMap["Pending"], dataObject.returnedObject[1].StatusMap["Closed"], dataObject.returnedObject[1].StatusMap["In-Progress"], dataObject.returnedObject[1].AVG],
+                        [dataObject.returnedObject[2].ItemName, dataObject.returnedObject[2].StatusMap["Open"], dataObject.returnedObject[2].StatusMap["Overdue"], dataObject.returnedObject[2].StatusMap["Pending"], dataObject.returnedObject[2].StatusMap["Closed"], dataObject.returnedObject[2].StatusMap["In-Progress"], dataObject.returnedObject[2].AVG],
+                        [dataObject.returnedObject[3].ItemName, dataObject.returnedObject[3].StatusMap["Open"], dataObject.returnedObject[3].StatusMap["Overdue"], dataObject.returnedObject[3].StatusMap["Pending"], dataObject.returnedObject[3].StatusMap["Closed"], dataObject.returnedObject[3].StatusMap["In-Progress"], dataObject.returnedObject[3].AVG]
+                    ]);
+
+                    aisOptions = {
+                        title: 'All System Items Status',
+                        vAxis: { title: 'Counter' , format: '0'},
+                        hAxis: { title: 'Item Type' },
+                        seriesType: 'bars',
+                        series: { 5: { type: 'line' } },
+                        backgroundColor: {
+                            fill: '#fff',
+                            fillOpacity: 0
+                        },
+                        animation: {
+                            startup: true,
+                            duration: 300,
+                            ease: 'out'
+                        }
+                    };
+
+                    aisChart = new google.visualization.ComboChart(document.getElementById('ais-chart'));
+                    aisChart.draw(aisData, aisOptions);
+
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+
+    }
+
+    window.onresize = function () {
+        initializeEceBubbleChart();
+        aisChart.draw(aisData, aisOptions);
+        topNfrsChart.draw(topNfrsData, topNfrsOptions);
+        sysTypesChart.draw(sysTypesData, sysTypesOptions);
+        adjustListMargins();
+    }
+
+    function getSprintsList() {
+        $.ajax({
+            type: "GET",
+            url: "/Project/GetSprintsForCharts",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    uceBuddleChartDataObject2 = dataObject.returnedObject;
+
+                    google.charts.load('current', { 'packages': ['corechart'] });
+                    google.charts.setOnLoadCallback(initializeEceBubbleChart);
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getProjectsList() {
+        var name = "";
+        var domain = null;
+
+        $("#homeProjectsList").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Project/GetProjectsList",
+            data: "{'name': '" + name + "', 'domain':" + domain + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    uceBuddleChartDataObject = dataObject.returnedObject;
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        $("#homeProjectsList").append("<li><a href='/Project/ProjectPage?projectID=" + dataObject.returnedObject[i].ID+"'>" + dataObject.returnedObject[i].Name+"</a></li>");
+                    }
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+                adjustListMargins();
+                getSprintsList();
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    $('document').ready(function () {
+        $('.nav a').removeClass("active");
+        $('#navItemHome').addClass("active");
+        getProjectsList();
+
+    });
+</script>
+

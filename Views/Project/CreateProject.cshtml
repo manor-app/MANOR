@@ -1,0 +1,331 @@
+﻿
+@{
+    ViewBag.Title = "CreateProject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0" id="pageContent">
+    <div class="col-md-10 offset-md-1 p-5" style="height:100%;">
+        <fieldset style="height:60%;overflow :hidden;">
+            <legend>PROJECTS LIST</legend>
+            <div class="col-md-12" style="height: 70%;">
+                <div class="row p-3">
+                    <div class="col-md-3 offset-md-2 text-left">
+                        <label>Project Name:</label>
+                        <input id="srchTxtProjectName" type="text" class="form-control form-control-sm" placeholder="Project 1, Project 2 ... etc" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Project Domain:</label>
+                        <select id="srchDdmDomain" class="form-control form-control-sm"></select>
+                    </div>
+
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="getProjectsList();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Search</button>
+                    </div>
+                </div>
+                <div class="table-responsive" style="max-height: 40vh;overflow-y: auto;margin:10px 0px 0 0;padding: 0 20px 100px 20px;">
+                    <div class="Table-Pagination">
+                        <div class="TP-Row">
+                            <div class="TP-PageIndex-Container">
+                                <label>Page:</label>
+                                <select></select>
+                            </div>
+                            <div class="TP-IPP-Container">
+                                <label>Items Per Page:</label>
+                                <select></select>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Project Name</th>
+                                <th scope="col">Project Domain</th>
+                                <th scope="col">Project Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="plTableBody">
+                        </tbody>
+                    </table>
+                    <button class="btn btn-sm btn-success m-2" onclick="tableToExcel($(this).prev()[0], 'Projects');">Export</button>
+
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset style="height:40%;overflow :hidden;">
+            <legend>CREATE PROJECT</legend>
+            <div class="col-md-12" style="height: 90%;overflow-y:auto">
+                <div class="row p-2">
+                    <div class="col-md-3 offset-md-1 text-left">
+                        <label><span class="mandatoryStar">*</span>Project Name:</label>
+                        <input id="addTxtProjectName" type="text" class="form-control form-control-sm mandatory-field add-proj-input-txt" placeholder="Project 1, Project 2 .. etc" />
+                    </div>
+                    <div class="col-md-3">
+                        <label><span class="mandatoryStar">*</span>Domain:</label>
+                        <select id="addDdmDomain" class="form-control form-control-sm mandatory-field add-proj-input-ddm"></select>
+                    </div>
+                    <div class="col-md-2 text-left">
+                        <label><span class="mandatoryStar">*</span>System Type:</label>
+                        <select id="addDdmSystemType" class="form-control form-control-sm mandatory-field add-proj-input-ddm"></select>
+                    </div>
+                    <div class="col-md-2">
+                        <label><span class="mandatoryStar">*</span>Status:</label>
+                        <select id="addDdmStatus" class="form-control form-control-sm mandatory-field add-proj-input-ddm"></select>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col-md-3 offset-md-1 text-left">
+                        <label>Customer Name:</label>
+                        <input id="addTxtCustomerName" type="text" class="form-control form-control-sm add-proj-input-txt" placeholder="Someone someone .. etc" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Customer Phone:</label>
+                        <input id="addTxtCustomerPhone" type="text" class="form-control form-control-sm add-proj-input-txt" placeholder="01xxxxxxxxxx .. etc" />
+                    </div>
+                    <div class="col-md-4 text-left">
+                        <label>Customer Email:</label>
+                        <input id="addTxtCustomerEmail" type="email" class="form-control form-control-sm add-proj-input-txt" placeholder="someone@gmail.com .. etc" />
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col-md-2 offset-md-1">
+                        <label>Start Date:</label>
+                        <input id="addDtStartDate" type="date" class="form-control form-control-sm add-proj-input-dt" placeholder="12/4/2021 .. etc" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>End Date:</label>
+                        <input id="addDtEndDate" type="date" class="form-control form-control-sm add-proj-input-dt" placeholder="12/4/2022 .. etc" />
+                    </div>
+                    <div class="col-md-4 text-left">
+                        <label>Description:</label>
+                        <textarea id="addTxtDescription" rows="1" class="form-control form-control-sm add-proj-input-txt" placeholder="Some Description Here..."></textarea>
+                    </div>
+
+                    <div class="col-md-2 p-0" style="position: relative;">
+                        <button onclick="createNewProject();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 42.5%;">Submit</button>
+                    </div>
+                </div>
+                <div class="row p-2">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<script>
+
+    function createNewProject() {
+
+        var projName = $("#addTxtProjectName").val();
+        var domain = $("#addDdmDomain").val();
+        var systype = $("#addDdmSystemType").val();
+        var status = $("#addDdmStatus").val();
+        var cName = $("#addTxtCustomerName").val();
+        var cPhone = $("#addTxtCustomerPhone").val();
+        var cEmail = $("#addTxtCustomerEmail").val();
+        var startDate = $("#addDtStartDate").val();
+        var endDate = $("#addDtEndDate").val();
+        var description = $("#addTxtDescription").val();
+
+        var mandatoryInserted = true;
+        $('.mandatory-field').each(function (i, obj) {
+            if ($(this).val() == "" || $(this).val() == null || $(this).val() == 0) {
+                mandatoryInserted = false;
+            }
+        });
+
+        if (!mandatoryInserted) {
+            alert("Please Insert Mandatory Fields!");
+            return;
+        }
+
+        if (!validateEmail(cEmail) && cEmail != null && cEmail != "") {
+            alert("Customer Email Is Not Valid!");
+            return;
+        }
+
+        var todayDate = formatDate(new Date());
+
+        if ((endDate != "" && endDate < todayDate) || (startDate != "" && startDate < todayDate)) {
+            alert("Old Dates Are Not Allowed!.");
+            return;
+        }
+
+        if ((endDate < startDate || endDate == startDate) && (startDate != "" || endDate != "")) {
+            alert("End Date Must Be After Start Date!.");
+            return;
+        }
+
+        var projectObject = new Array();
+
+        projectObject[0] = {
+            "ID": 0,
+            "Name": projName,
+            "Domain": domain,
+            "SystemType": systype,
+            "Status": status,
+            "CustomerName": cName,
+            "CustomerPhone": cPhone,
+            "CustomerEmail": cEmail,
+            "StartDate": startDate,
+            "EndDate": endDate,
+            "Description": description,
+        }
+
+        var stringfiedProjectObject = JSON.stringify(projectObject[0]);
+
+        $.ajax({
+            type: "POST",
+            url: "/Project/CreateNewProject",
+            data: "{'proj': " + stringfiedProjectObject + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    $('.add-proj-input-txt').val("");
+                    $('.add-proj-input-ddm').val(0);
+                    $('.add-proj-input-dt').val(null);
+                    getProjectsList();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getProjectsList() {
+        var name = $("#srchTxtProjectName").val();
+        var domain = $("#srchDdmDomain").val();
+
+        $("#plTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Project/GetProjectsList",
+            data: "{'name': '" + name + "', 'domain':" + domain + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        $("#plTableBody").append("<tr><th scope= 'row'>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].Name + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Domain + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Status + "</td> " +
+                            "<td><button class='btn btn-sm btn-secondary' onclick='window.location = \"/Project/ProjectPage?projectID=" + dataObject.returnedObject[i].ID + "\";'>View</button></td>" +
+                            "</tr>");
+                    }
+
+                    $(".Table-Pagination")[0].UpdateTablePagination();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getDomains(itemToSelect = null) {
+        $("#srchDdmDomain").html("");
+        $("#srchDdmDomain").append("<option selected disabled value='0'>Select Domain</option>");
+        $("#addDdmDomain").html("");
+        $("#addDdmDomain").append("<option selected disabled value='0'>Select Domain</option>");
+        $.ajax({
+            type: "GET",
+            url: "/Domains/GetDomains",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                    if (itemToSelect == dataObject.returnedObject[i].Domain) {
+                        $("#srchDdmDomain").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                        $("#addDdmDomain").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                    } else {
+                        $("#srchDdmDomain").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                        $("#addDdmDomain").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                    }
+                }
+
+                $("#srchDdmDomain").append("<option value='null'>All</option>");
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getSystemTypes(itemToSelect = null) {
+        $("#addDdmSystemType").html("");
+        $("#addDdmSystemType").append("<option selected disabled value='0'>Select Type</option>");
+        $.ajax({
+            type: "GET",
+            url: "/Project/GetSystemTypes",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                    if (itemToSelect == dataObject.returnedObject[i].Type) {
+                        $("#addDdmSystemType").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Type + "</option>");
+                    } else {
+                        $("#addDdmSystemType").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Type + "</option>");
+                    }
+                }
+
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getStatus(itemToSelect = null) {
+        $("#addDdmStatus").html("");
+        $("#addDdmStatus").append("<option selected disabled value='0'>Select Status</option>");
+        $.ajax({
+            type: "GET",
+            url: "/Project/GetStatus",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                    if (itemToSelect == dataObject.returnedObject[i].Status) {
+                        $("#addDdmStatus").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Status + "</option>");
+                    } else {
+                        $("#addDdmStatus").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Status + "</option>");
+                    }
+                }
+
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function validateEmail(email) {
+        var filter = /^([\w-\.]+)@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        return filter.test(email);
+    }
+
+    $('document').ready(function () {
+        $('.nav a').removeClass("active");
+        getDomains();
+        getSystemTypes();
+        getStatus();
+        getProjectsList();
+    });
+</script>
+

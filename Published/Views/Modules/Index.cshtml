@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Modules";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" id="pageContent">
+    <div class="col-md-10 offset-md-1" style="padding: 50px 0;">
+        <fieldset>
+            <legend>Search Modules:</legend>
+            <div class="col-md-12">
+                <div class="row p-4">
+                    <div class="col-md-3 offset-md-2 text-left">
+                        <label>Domain:</label>
+                        <select id="srchDdmDomain" class="form-control form-control-sm"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Module Name:</label>
+                        <input id="srchTxtModule" type="text" class="form-control form-control-sm" placeholder="Hr, Sales .. etc" />
+                    </div>
+
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="getModulesList();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Search</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="table-responsive" style="max-height:45vh;">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Domain</th>
+                                    <th scope="col">Module</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mlTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Add Module:</legend>
+            <div class="col-md-12">
+                <div class="row p-3">
+                    <div class="col-md-3 offset-md-2 text-left">
+                        <label><span class="mandatoryStar">*</span>Domain:</label>
+                        <select id="addDdmDomain" class="form-control form-control-sm"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <label><span class="mandatoryStar">*</span>Module Name:</label>
+                        <input id="addTxtModule" type="text" class="form-control form-control-sm" placeholder="Hr, Sales .. etc" />
+                    </div>
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="addNewModule();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Add</button>
+                    </div>
+                </div>
+                <div class="p-2"></div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<script>
+    function addNewModule() {
+        var domain = $("#addDdmDomain").val();
+        var module = $("#addTxtModule").val();
+
+        if (domain === "" || domain == null || module === "") {
+            alert("Insert Mandatory Fields!!!");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Modules/AddModule",
+            data: "{'domain': " + domain + ", 'module':'"+module+"'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    $("#addDdmDomain").val(0);
+                    $("#addTxtModule").val("");
+                    getModulesList();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getModulesList() {
+        var domain = $("#srchDdmDomain").val();
+        var module = $("#srchTxtModule").val();
+
+        $("#mlTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Modules/GetModulesList",
+            data: "{'domain': " + domain + ", 'module':'"+module+"'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        $("#mlTableBody").append("<tr><th scope= 'row'>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].Domain + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Module + "</td> " +
+                            "<td><button class='btn btn-sm btn-primary'>Update</button> <button class='btn btn-sm btn-danger'>Delete</button></td>" +
+                            "</tr>");
+                    }
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getDomains(itemToSelect = null) {
+        $("#srchDdmDomain").html("");
+        $("#srchDdmDomain").append("<option selected disabled value='0'>Select Domain</option>");
+        $("#addDdmDomain").html("");
+        $("#addDdmDomain").append("<option selected disabled value='0'>Select Domain</option>");
+        $.ajax({
+            type: "GET",
+            url: "/Domains/GetDomains",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                    if (itemToSelect == dataObject.returnedObject[i].Domain) {
+                        $("#srchDdmDomain").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                        $("#addDdmDomain").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                    } else {
+                        $("#srchDdmDomain").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                        $("#addDdmDomain").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                    }
+                }
+                $("#srchDdmDomain").append("<option value='null'>All</option>");
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    $('document').ready(function () {
+        $('.nav a').removeClass("active");
+        $('#navItemModules').addClass("active");
+        getModulesList();
+        getDomains();
+    });
+</script>

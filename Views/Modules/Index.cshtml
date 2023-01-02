@@ -1,0 +1,369 @@
+﻿
+@{
+    ViewBag.Title = "Modules";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" id="pageContent">
+    <div class="col-md-10 offset-md-1" style="padding: 50px 0;">
+        <fieldset>
+            <legend>Search Modules:</legend>
+            <div class="col-md-12">
+                <div class="row p-4">
+                    <div class="col-md-3 offset-md-2 text-left">
+                        <label>Domain:</label>
+                        <select id="srchDdmDomain" class="form-control form-control-sm"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Module Name:</label>
+                        <input id="srchTxtModule" type="text" class="form-control form-control-sm" placeholder="Hr, Sales .. etc" />
+                    </div>
+
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="getModulesList();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Search</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="table-responsive" style="max-height:45vh;">
+                        <div class="Table-Pagination">
+                            <div class="TP-Row">
+                                <div class="TP-PageIndex-Container">
+                                    <label>Page:</label>
+                                    <select></select>
+                                </div>
+                                <div class="TP-IPP-Container">
+                                    <label>Items Per Page:</label>
+                                    <select></select>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col" hidden>#</th>
+                                    <th scope="col">Domain</th>
+                                    <th scope="col">Module</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mlTableBody">
+                            </tbody>
+                        </table>
+                        <button class="btn btn-sm btn-success m-2" onclick="tableToExcel($(this).prev()[0], 'Modules');">Export</button>
+
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Add Module:</legend>
+            <div class="col-md-12">
+                <div class="row p-3">
+                    <div class="col-md-3 offset-md-2 text-left">
+                        <label><span class="mandatoryStar">*</span>Domain:</label>
+                        <select id="addDdmDomain" class="form-control form-control-sm"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <label><span class="mandatoryStar">*</span>Module Name:</label>
+                        <input id="addTxtModule" type="text" class="form-control form-control-sm" placeholder="Hr, Sales .. etc" />
+                    </div>
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="addNewModule();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Add</button>
+                    </div>
+                </div>
+                <div class="p-2"></div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<script>
+
+    var tmpModulesList = new Array();
+
+    function viewModuleUpdatePanel(moduleIndex) {
+
+        $('#ump-input-ID').val(tmpModulesList[moduleIndex].ID);
+        $('#ump-input-Module').val(tmpModulesList[moduleIndex].Module1);
+        getDomains(tmpModulesList[moduleIndex].Domain);
+        $('#ump-btn-Submit').attr("onclick", "updateModule(" + moduleIndex + ");");
+
+        $('#updateModulePanel').fadeIn();
+    }
+
+    function addNewModule() {
+        var domain = $("#addDdmDomain").val();
+        var module = $("#addTxtModule").val();
+
+        if (domain === "" || domain == null || module === "") {
+            alert("Insert Mandatory Fields!!!");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Modules/AddModule",
+            data: "{'domain': " + domain + ", 'module':'" + module + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    $("#addDdmDomain").val(0);
+                    $("#addTxtModule").val("");
+                    getModulesList();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getModulesList() {
+        var domain = $("#srchDdmDomain").val();
+        var module = $("#srchTxtModule").val();
+
+        $("#mlTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Modules/GetModulesList",
+            data: "{'domain': " + domain + ", 'module':'" + module + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                tmpModulesList = new Array();
+
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        tmpModulesList[i] = {
+                            "ID": dataObject.returnedObject[i].ID,
+                            "Domain": dataObject.returnedObject[i].Domain,
+                            "Module1": dataObject.returnedObject[i].Module
+                        }
+
+                        $("#mlTableBody").append("<tr><th scope= 'row' hidden>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].Domain + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Module + "</td> " +
+                            "<td><button class='btn btn-sm btn-primary' onclick='viewModuleUpdatePanel(" + i + ");'>Update</button> <button onclick='deleteModule(" + i + ");' class='btn btn-sm btn-danger'>Delete</button></td>" +
+                            "</tr>");
+                    }
+
+                    $('.Table-Pagination')[0].UpdateTablePagination();
+
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getDomains(itemToSelect = null) {
+        if (itemToSelect == null) {
+            $("#srchDdmDomain").html("");
+            $("#srchDdmDomain").append("<option selected disabled value='0'>Select Domain</option>");
+            $("#addDdmDomain").html("");
+            $("#addDdmDomain").append("<option selected disabled value='0'>Select Domain</option>");
+        } else {
+            $("#ump-input-Domain").html("");
+            $("#ump-input-Domain").append("<option selected disabled value='0'>Select Domain</option>");
+        }
+        $.ajax({
+            type: "GET",
+            url: "/Domains/GetDomains",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                    if (itemToSelect == null) {
+                        if (itemToSelect == dataObject.returnedObject[i].Domain) {
+                            $("#srchDdmDomain").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                            $("#addDdmDomain").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                        } else {
+                            $("#srchDdmDomain").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                            $("#addDdmDomain").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                        }
+                    } else {
+                        if (itemToSelect == dataObject.returnedObject[i].Domain) {
+                            $("#ump-input-Domain").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                        } else {
+                            $("#ump-input-Domain").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "</option>");
+                        }
+                    }
+                }
+                $("#srchDdmDomain").append("<option value='null'>All</option>");
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function updateModule(index) {
+
+        var mandatoryInserted = true;
+        $('.ump-mandatory-field').each(function (i, obj) {
+            if ($(this).val() == "" || $(this).val() == null || $(this).val() == 0) {
+                mandatoryInserted = false;
+            }
+        });
+
+        if (!mandatoryInserted) {
+            alert("Please Insert Mandatory Fields!");
+            return;
+        }
+
+        tmpModulesList[index].Domain = $('#ump-input-Domain').val();
+        tmpModulesList[index].Module1 = $('#ump-input-Module').val();
+        var stringfiedModuleObject = JSON.stringify(tmpModulesList[index]);
+
+        $.ajax({
+            type: "POST",
+            url: "/Modules/UpdateModule",
+            data: "{'updatedModule':" + stringfiedModuleObject + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    $('#updateModulePanel').hide();
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    getModulesList();
+                    getDomains();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function deleteModule(index) {
+        var moduleID = tmpModulesList[index].ID;
+        var moduleDomain = tmpModulesList[index].Domain;
+        var moduleText= tmpModulesList[index].Module1;
+
+        let deletedModule = confirm("Confirm Deleting Module:\n\"" + moduleText + "\" - In Domain \"" + moduleDomain + "\" With The ID \"" + moduleID + "\"");
+        if (!deletedModule) {
+            return;
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/Modules/DeleteModule",
+                data: "{'moduleID':" + moduleID + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "JSON",
+                success: function (dataObject) {
+                    if (dataObject.successFlag) {
+                        alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                        getModulesList();
+                        getDomains();
+                    } else {
+                        alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        }
+    }
+
+    $('document').ready(function () {
+        $('.nav a').removeClass("active");
+        $('#navItemModules').addClass("active");
+        getModulesList();
+        getDomains();
+    });
+</script>
+
+
+<style>
+    #updateModulePanel {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.2);
+        z-index: 100;
+    }
+
+    #updateModule-Data-Container {
+        position: relative;
+        background: white;
+        width: 60%;
+        height: auto;
+        max-height: 50%;
+        overflow-y: auto;
+        margin: 12% auto;
+        padding: 0 0 50px 0;
+        border-radius: 30px;
+        box-shadow: 0px 0px 15px -2px black;
+    }
+
+    #umpCloseBtn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+        #umpCloseBtn:hover {
+            top: 18px;
+            right: 18px;
+            font-size: 34px;
+        }
+
+    #updateModule-Data-Container h4 {
+        position: relative;
+        width: 400px;
+        top: 20px;
+        color: #444;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
+
+<div id="updateModulePanel">
+    <div id="updateModule-Data-Container">
+        <i onclick="$('#updateModulePanel').fadeOut();" id="umpCloseBtn" class="fa fa-close"></i>
+        <h4>Update Module Info</h4>
+        <br />
+        <hr style="width: 85%;" />
+        <div id="updateModule-Data" class="col-md-10 offset-md-1 p-0">
+            <div class="row">
+                <div class="col-md-2 offset-md-2">
+                    <label>ID</label>
+                    <input disabled id="ump-input-ID" class="form-control form-control-sm" type="text" />
+                </div>
+                <div class="col-md-6">
+                    <label><span class="mandatoryStar">*</span>Domain</label>
+                    <select id="ump-input-Domain" class="form-control form-control-sm ump-mandatory-field"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 offset-md-2">
+                    <label><span class="mandatoryStar">*</span>Module</label>
+                    <input id="ump-input-Module" class="form-control form-control-sm ump-mandatory-field" type="text" />
+                </div>
+                <div class="col-md-4 text-right">
+                    <label class="col-md-12" style="color:transparent">-</label>
+                    <button id="ump-btn-Submit" class="btn btn-sm btn-success float-right">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

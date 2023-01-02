@@ -1,0 +1,480 @@
+﻿
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" id="pageContent">
+    <div class="col-md-10 offset-md-1" style="padding: 50px 0;">
+        <fieldset>
+            <legend>SEARCH USERS:</legend>
+            <div class="col-md-12">
+                <div class="row p-4">
+                    <div class="col-md-3">
+                        <label>Email:</label>
+                        <input id="srchTxtEmail" type="email" class="form-control form-control-sm" placeholder="someone@gmail.com" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Full Name:</label>
+                        <input id="srchTxtFname" type="text" class="form-control form-control-sm" placeholder="Someone Someone Someone" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Title:</label>
+                        <select id="srchDdmTitle" class="form-control form-control-sm">
+                        </select>
+                    </div>
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="getUsersList();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Search</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="table-responsive" style="max-height:45vh;">
+                        <div class="Table-Pagination">
+                            <div class="TP-Row">
+                                <div class="TP-PageIndex-Container">
+                                    <label>Page:</label>
+                                    <select></select>
+                                </div>
+                                <div class="TP-IPP-Container">
+                                    <label>Items Per Page:</label>
+                                    <select></select>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col" hidden>#</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">Title</th>
+                                    <th>Projects</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ulTableBody">
+                            </tbody>
+                        </table>
+                        <button class="btn btn-sm btn-success m-2" onclick="tableToExcel($(this).prev()[0], 'Users');">Export</button>
+
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>ADD USER:</legend>
+            <div class="col-md-12">
+                <div class="row p-4">
+                    <div class="col-md-2">
+                        <label><span class="mandatoryStar">*</span>Email:</label>
+                        <input id="addTxtEmail" type="email" class="form-control form-control-sm add-user-input-txt mandatory-field" placeholder="someone@gmail.com" />
+                    </div>
+                    <div class="col-md-2">
+                        <label><span class="mandatoryStar">*</span>FullName:</label>
+                        <input id="addTxtFname" type="text" class="form-control form-control-sm add-user-input-txt mandatory-field" placeholder="Enter full name" />
+                    </div>
+                    <div class="col-md-2">
+                        <label><span class="mandatoryStar">*</span>Title:</label>
+                        <select id="addDdmTitle" class="form-control form-control-sm add-user-input-ddm mandatory-field"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <label><span class="mandatoryStar">*</span>Projects:</label>
+                        <select id="addDdmProject" class="form-control form-control-sm add-user-input-ddm mandatory-field"></select>
+                    </div>
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="addNewUser();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Add</button>
+                    </div>
+                </div>
+                <div class="p-4">
+
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+
+<script>
+
+    var tmpUsersList = new Array();
+
+    function viewUserUpdatePanel(userIndex) {
+
+        $('#uup-input-ID').val(tmpUsersList[userIndex].ID);
+        $('#uup-input-Email').val(tmpUsersList[userIndex].Email);
+        $('#uup-input-Fullname').val(tmpUsersList[userIndex].Fullname);
+        getUsersTitles(tmpUsersList[userIndex].Title);
+        $('#uup-btn-Submit').attr("onclick", "updateUser(" + userIndex + ");");
+        $('#updateUserPanel').fadeIn();
+    }
+
+    function addNewUser() {
+
+        var email = $("#addTxtEmail").val();
+        var project = $("#addDdmProject").val();
+
+        var mandatoryInserted = true;
+        $('.mandatory-field').each(function (i, obj) {
+            if ($(this).val() == "" || $(this).val() == null || $(this).val() == 0) {
+                mandatoryInserted = false;
+            }
+        });
+
+        if (!mandatoryInserted) {
+            alert("Please Insert Mandatory Fields!");
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            alert("Email is not valid!");
+            return;
+        }
+
+        var userObject = new Array();
+
+        userObject[0] = {
+            "ID": 0,
+            "Email": $("#addTxtEmail").val(),
+            "Fullname": $("#addTxtFname").val(),
+            "Title": $("#addDdmTitle").val(),
+            "FirstTimeLogin": 1
+        }
+
+        var stringfieduserObject = JSON.stringify(userObject[0]);
+
+        $.ajax({
+            type: "POST",
+            url: "/Users/CreateUser",
+            data: "{'userObj': " + stringfieduserObject + ",'project':" + project + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    $('.add-user-input-txt').val("");
+                    $('.add-user-input-ddm').val(0);
+                    getUsersList();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getUsersList() {
+        var email = $("#srchTxtEmail").val();
+        var fName = $("#srchTxtFname").val();
+        var title = $("#srchDdmTitle").val();
+
+        $("#ulTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Users/GetUsersList",
+            data: "{'email': '" + email + "', 'fName':'" + fName + "', 'title':" + title + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+
+                tmpUsersList = new Array();
+
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        tmpUsersList[i] = {
+                            "ID": dataObject.returnedObject[i].ID,
+                            "Email": dataObject.returnedObject[i].Email,
+                            "Password": 0,
+                            "Fullname": dataObject.returnedObject[i].Fullname,
+                            "Title": dataObject.returnedObject[i].Title,
+                            "FirstTimeLogin": 0
+                        }
+
+                        $("#ulTableBody").append("<tr><th scope= 'row' hidden>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].Email + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Fullname + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Title + "</td> " +
+                            "<td><a href='#' onclick='getUserassignedProjects(" + dataObject.returnedObject[i].ID + ")'> View List </a></td> " +
+                            "<td><button class='btn btn-sm btn-primary' onclick='viewUserUpdatePanel(" + i + ");'>Update</button> <button onclick='deleteUser(" + i + ");' class='btn btn-sm btn-danger'>Delete</button></td>" +
+                            "</tr>");
+                    }
+
+                    $(".Table-Pagination")[0].UpdateTablePagination();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function updateUser(index) {
+
+        var mandatoryInserted = true;
+        $('.uup-mandatory-field').each(function (i, obj) {
+            if ($(this).val() == "" || $(this).val() == null || $(this).val() == 0) {
+                mandatoryInserted = false;
+            }
+        });
+
+        if (!mandatoryInserted) {
+            alert("Please Insert Mandatory Fields!");
+            return;
+        }
+
+        if (!validateEmail($('#uup-input-Email').val())) {
+            alert("Email is not valid!");
+            return;
+        }
+
+        tmpUsersList[index].Email = $('#uup-input-Email').val();
+        tmpUsersList[index].Fullname = $('#uup-input-Fullname').val();
+        tmpUsersList[index].Title = $('#uup-input-Title').val();
+        var stringfiedUserObject = JSON.stringify(tmpUsersList[index]);
+
+        $.ajax({
+            type: "POST",
+            url: "/Users/UpdateUser",
+            data: "{'updatedUser':" + stringfiedUserObject + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    $('#updateUserPanel').hide();
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    getUsersList();
+                    getUsersTitles();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function deleteUser(index) {
+        var userID = tmpUsersList[index].ID;
+        var userEmail = tmpUsersList[index].Email;
+
+        let deletedUser = confirm("Confirm Deleting User:\n\"" + userEmail + "\" With The ID \"" + userID + "\"");
+        if (!deletedUser) {
+            return;
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/Users/DeleteUser",
+                data: "{'userID':" + userID + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "JSON",
+                success: function (dataObject) {
+                    if (dataObject.successFlag) {
+                        alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                        getUsersList();
+                        getUsersTitles();
+                    } else {
+                        alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        }
+    }
+
+    function getUsersTitles(itemToSelect = null) {
+
+        if (itemToSelect == null) {
+            $("#srchDdmTitle").html("");
+            $("#srchDdmTitle").append("<option selected disabled value='0'>Select Title</option>");
+            $("#addDdmTitle").html("");
+            $("#addDdmTitle").append("<option selected disabled value='0'>Select Title</option>");
+        } else {
+            $("#uup-input-Title").html("");
+            $("#uup-input-Title").append("<option selected disabled value='0'>Select Title</option>");
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/Users/GetUsersTitles",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                    if (itemToSelect == null) {
+                        if (itemToSelect == dataObject.returnedObject[i].Title) {
+                            $("#srchDdmTitle").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Title + "</option>");
+                            $("#addDdmTitle").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Title + "</option>");
+                        } else {
+                            $("#srchDdmTitle").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Title + "</option>");
+                            $("#addDdmTitle").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Title + "</option>");
+                        }
+                    } else {
+                        if (itemToSelect == dataObject.returnedObject[i].Title) {
+                            $("#uup-input-Title").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Title + "</option>");
+                        } else {
+                            $("#uup-input-Title").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Title + "</option>");
+                        }
+                    }
+                }
+
+                $("#srchDdmTitle").append("<option value='null'>All Titles</option>");
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getProjects(itemToSelect = null) {
+        $("#addDdmProject").html("");
+        $("#addDdmProject").append("<option selected disabled value='0'>Select Project</option>");
+        $.ajax({
+            type: "GET",
+            url: "/Users/GetProjects",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                    if (itemToSelect == dataObject.returnedObject[i].Name) {
+                        $("#addDdmProject").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Name + "</option>");
+                    } else {
+                        $("#addDdmProject").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Name + "</option>");
+                    }
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getUserassignedProjects(userID) {
+        $.ajax({
+            type: "POST",
+            url: "/Users/GetUserAssignedProjects",
+            data: "{'userID':" + userID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                var projList = "";
+                for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                    projList += dataObject.returnedObject[i].ProjectName + "\n";
+                }
+                if (projList == "")
+                    projList = "None ..";
+                alert(projList);
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function validateEmail(email) {
+        var filter = /^([\w-\.]+)@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        return filter.test(email);
+    }
+
+    $('document').ready(function () {
+        $('.nav a').removeClass("active");
+        $('#navItemUsers').addClass("active");
+        getUsersTitles();
+        getProjects();
+        getUsersList();
+    });
+</script>
+
+<style>
+    #updateUserPanel {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.2);
+        z-index: 100;
+    }
+
+    #updateUser-Data-Container {
+        position: relative;
+        background: white;
+        width: 60%;
+        height: auto;
+        max-height: 50%;
+        overflow-y: auto;
+        margin: 12% auto;
+        padding: 0 0 50px 0;
+        border-radius: 30px;
+        box-shadow: 0px 0px 15px -2px black;
+    }
+
+    #uupCloseBtn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+        #uupCloseBtn:hover {
+            top: 18px;
+            right: 18px;
+            font-size: 34px;
+        }
+
+    #updateUser-Data-Container h4 {
+        position: relative;
+        width: 400px;
+        top: 20px;
+        color: #444;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
+
+<div id="updateUserPanel">
+    <div id="updateUser-Data-Container">
+        <i onclick="$('#updateUserPanel').fadeOut();" id="uupCloseBtn" class="fa fa-close"></i>
+        <h4>Update User Info</h4>
+        <br />
+        <hr style="width: 85%;" />
+        <div id="updateUser-Data" class="col-md-10 offset-md-1 p-0">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>ID</label>
+                    <input disabled id="uup-input-ID" class="form-control form-control-sm" type="text" />
+                </div>
+                <div class="col-md-6">
+                    <label><span class="mandatoryStar">*</span>Email</label>
+                    <input id="uup-input-Email" class="form-control form-control-sm uup-mandatory-field" type="text" />
+                </div>
+                <div class="col-md-4">
+                    <label><span class="mandatoryStar">*</span>Title</label>
+                    <select id="uup-input-Title" class="form-control form-control-sm uup-mandatory-field"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <label><span class="mandatoryStar">*</span>Fullname</label>
+                    <input id="uup-input-Fullname" class="form-control form-control-sm uup-mandatory-field" type="text" />
+                </div>
+                <div class="col-md-4 text-right">
+                    <label class="col-md-12" style="color:transparent">-</label>
+                    <button id="uup-btn-Submit" class="btn btn-sm btn-success float-right">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

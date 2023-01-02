@@ -1,0 +1,86 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>MANOR</title>
+    <link rel="shortcut icon" type="image" href="" />
+    <meta name="description" content="NFR Application">
+    <meta name="author" content="Mustafa Gamal">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- My CSS Imports -->
+    <link rel="stylesheet" href="~/Content/Bootstrap-v4.4.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="~/Content/Font-Awesome/css/font-awesome.css"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/Style.css">
+    <!-- My Script Imports -->
+    <script src="~/Scripts/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="~/Scripts/Bootstrap-v4.4.1/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/GlobalFunctions.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="container-fluid" id="navMainCont" style="">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2 p-1 text-center" id="navLogo" style="color:#ddd;">
+                    <h2 onclick="window.location = '/Home/'">MANOR</h2>
+                </div>
+                <div class="col-md-8 p-2 text-center" id="navItems" style="">
+                    <nav class="nav justify-content-center">
+                        <a id="navItemHome" href="/Home/" class="nav-link">Home</a>
+                        <a id="navItemDomains" href="/Domains/" class="nav-link">Domains</a>
+                        <a id="navItemNFRs" href="/NFRs/" class="nav-link">NFRs</a>
+                        <a id="navItemUsers" href="/Users/" class="nav-link">Users</a>
+                        <a id="navItemModules" href="/Modules/" class="nav-link">Modules</a>
+                        <!--<a id="navItemReports" href="/Reports/" class="nav-link">Reports</a>-->
+                    </nav>
+                </div>
+                <div class="col-md-2 text-right" id="navItems" style="">
+                    <div class="dropdown">
+                        <button class="loggedinUserNavItem" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="outline:none;">
+                            <i class="fa fa-user" style="font-size:35px;color:#fff;text-shadow: 0px 0px 5px black;"></i>
+                        </button>
+                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton" style="border-radius:20px;box-shadow: 0px 0px 15px -5px black;width:auto;">
+                            <p class="" href="#" style="margin: 10px 20px; text-shadow: 1px 0px 4px #000; color: #fff; font-size: 18px; width: auto; white-space: nowrap;">@Request.Cookies["userFullname"].Value</p>
+                            <hr style="width:90%;margin:10px auto;"/>
+                            <button class="btn btn-sm btn-info" onclick="logout();" style="border-radius:10px;">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation Bar -->
+    <!-- Content -->
+    <div class="container-fluid p-0" id="pageContent0" style="">
+        @RenderBody()
+    </div>
+
+    <!-- Content -->
+    <!-- My JS Script -->
+    <script type="text/javascript" src="~/Scripts/js/Script.js"></script>
+    <!-- My JS Script -->
+</body>
+</html>
+
+<script>
+
+    function logout() {
+        $.ajax({
+            type: "POST",
+            url: "/Login/LogUserOut",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                window.location = "/Login";
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+</script>

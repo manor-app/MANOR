@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MANOFR" Class="ManofrSqlDbModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=MANOFR;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="MANOFRConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ApplicationsTypes" Member="ApplicationsTypes">
+    <Type Name="ApplicationsType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="ApplicationsType_Project" Member="Projects" ThisKey="ID" OtherKey="SystemType" Type="Project" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ComponentsStatus" Member="ComponentsStatus">
+    <Type Name="ComponentsStatus">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="ComponentsStatus_Project" Member="Projects" ThisKey="ID" OtherKey="Status" Type="Project" />
+      <Association Name="ComponentsStatus_Sprint" Member="Sprints" ThisKey="ID" OtherKey="Status" Type="Sprint" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Domains" Member="Domains">
+    <Type Name="Domain">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Domain" Member="Domain1" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="Domain_Module" Member="Modules" ThisKey="ID" OtherKey="Domain" Type="Module" />
+      <Association Name="Domain_Project" Member="Projects" ThisKey="ID" OtherKey="Domain" Type="Project" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Modules" Member="Modules">
+    <Type Name="Module">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Module" Member="Module1" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Domain" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Module_ProjectsModule" Member="ProjectsModules" ThisKey="ID" OtherKey="Module" Type="ProjectsModule" />
+      <Association Name="Module_Epic" Member="Epics" ThisKey="ID" OtherKey="Module" Type="Epic" />
+      <Association Name="Domain_Module" Member="Domain1" ThisKey="Domain" OtherKey="ID" Type="Domain" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Projects" Member="Projects">
+    <Type Name="Project">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="Domain" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SystemType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="CustomerPhone" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="CustomerEmail" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Project_ProjectsUser" Member="ProjectsUsers" ThisKey="ID" OtherKey="Project" Type="ProjectsUser" />
+      <Association Name="Project_ProjectsModule" Member="ProjectsModules" ThisKey="ID" OtherKey="Project" Type="ProjectsModule" />
+      <Association Name="Project_Sprint" Member="Sprints" ThisKey="ID" OtherKey="ProjectID" Type="Sprint" />
+      <Association Name="Project_Epic" Member="Epics" ThisKey="ID" OtherKey="ProjectID" Type="Epic" />
+      <Association Name="Project_ProjectsNFR" Member="ProjectsNFRs" ThisKey="ID" OtherKey="ProjectID" Type="ProjectsNFR" />
+      <Association Name="Domain_Project" Member="Domain1" ThisKey="Domain" OtherKey="ID" Type="Domain" IsForeignKey="true" />
+      <Association Name="ComponentsStatus_Project" Member="ComponentsStatus" ThisKey="Status" OtherKey="ID" Type="ComponentsStatus" IsForeignKey="true" />
+      <Association Name="ApplicationsType_Project" Member="ApplicationsType" ThisKey="SystemType" OtherKey="ID" Type="ApplicationsType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProjectsUsers" Member="ProjectsUsers">
+    <Type Name="ProjectsUser">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Project" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SysUser" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Project_ProjectsUser" Member="Project1" ThisKey="Project" OtherKey="ID" Type="Project" IsForeignKey="true" />
+      <Association Name="User_ProjectsUser" Member="User" ThisKey="SysUser" OtherKey="ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SystemNFRs" Member="SystemNFRs">
+    <Type Name="SystemNFR">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NFR" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Fullname" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="Title" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FirstTimeLogin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="User_ProjectsUser" Member="ProjectsUsers" ThisKey="ID" OtherKey="SysUser" Type="ProjectsUser" />
+      <Association Name="UsersTitle_User" Member="UsersTitle" ThisKey="Title" OtherKey="ID" Type="UsersTitle" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UsersNFRs" Member="UsersNFRs">
+    <Type Name="UsersNFR">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NFR" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UsersTitles" Member="UsersTitles">
+    <Type Name="UsersTitle">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="UsersTitle_User" Member="Users" ThisKey="ID" OtherKey="Title" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProjectsModules" Member="ProjectsModules">
+    <Type Name="ProjectsModule">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Project" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Module" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Module_ProjectsModule" Member="Module1" ThisKey="Module" OtherKey="ID" Type="Module" IsForeignKey="true" />
+      <Association Name="Project_ProjectsModule" Member="Project1" ThisKey="Project" OtherKey="ID" Type="Project" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sprints" Member="Sprints">
+    <Type Name="Sprint">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProjectID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Goal" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Project_Sprint" Member="Project" ThisKey="ProjectID" OtherKey="ID" Type="Project" IsForeignKey="true" />
+      <Association Name="ComponentsStatus_Sprint" Member="ComponentsStatus" ThisKey="Status" OtherKey="ID" Type="ComponentsStatus" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Epics" Member="Epics">
+    <Type Name="Epic">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProjectID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="Module" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Module_Epic" Member="Module1" ThisKey="Module" OtherKey="ID" Type="Module" IsForeignKey="true" />
+      <Association Name="Project_Epic" Member="Project" ThisKey="ProjectID" OtherKey="ID" Type="Project" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProjectsNFRs" Member="ProjectsNFRs">
+    <Type Name="ProjectsNFR">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProjectID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NFR" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Project_ProjectsNFR" Member="Project" ThisKey="ProjectID" OtherKey="ID" Type="Project" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

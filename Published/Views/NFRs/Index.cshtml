@@ -1,0 +1,545 @@
+﻿
+@{
+    ViewBag.Title = "NFRs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" id="pageContent">
+    <div class="col-md-10 offset-md-1" style="padding: 50px 0;">
+        <fieldset>
+            <legend>Non-Functional Requirements:</legend>
+            <div class="col-md-12">
+                <div class="row p-4">
+                    <div class="col-md-3 offset-md-1 text-right">
+                        <label>NFR Type:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input id="srchTxtNFR" type="text" class="form-control form-control-sm" placeholder="Performance, Security ... etc" />
+                    </div>
+
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="getNFRsList();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Search</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="table-responsive" style="max-height:40vh;">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Category</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="nfrlTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Add NFR Type:</legend>
+            <div class="col-md-12">
+                <div class="row p-3">
+                    <div class="col-md-3 offset-md-1 text-right">
+                        <label><span class="mandatoryStar">*</span>NFR Type:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input id="addTxtNFR" type="text" class="form-control form-control-sm" placeholder="Performance, Security ... etc" />
+                    </div>
+                    <div class="col-md-3 p-0" style="position: relative;">
+                        <button onclick="addNewNFR();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 25%;">Add</button>
+                    </div>
+                </div>
+                <div class="p-2"></div>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>NFR Conflict Matrix:</legend>
+            <div class="col-md-12">
+                <div class="col-md-12 text-center">
+                    <span><strong>(+)</strong> means positive relationship, <strong>(-)</strong> means negative relationship and <strong>(dark)</strong> cell means indifferent relationship</span>
+                </div>
+                <div class="p-0 table-responsive">
+                    <table class="table table-bordered blackTable table-sm">
+                        <thead>
+                            <tr>
+                                <th class="fixed" style="border: solid 1px #999;">▬</th>
+                                <th style="border: solid 1px #999;">Availability</th>
+                                <th style="border: solid 1px #999;">Efficiency</th>
+                                <th style="border: solid 1px #999;">Installability</th>
+                                <th style="border: solid 1px #999;">Integrity</th>
+                                <th style="border: solid 1px #999;">Interoperability</th>
+                                <th style="border: solid 1px #999;">Modifiability</th>
+                                <th style="border: solid 1px #999;">Performance</th>
+                                <th style="border: solid 1px #999;">Portability</th>
+                                <th style="border: solid 1px #999;">Reliability</th>
+                                <th style="border: solid 1px #999;">Reusability</th>
+                                <th style="border: solid 1px #999;">Robustness</th>
+                                <th style="border: solid 1px #999;">Safety</th>
+                                <th style="border: solid 1px #999;">Scalability</th>
+                                <th style="border: solid 1px #999;">Security</th>
+                                <th style="border: solid 1px #999;">Usability</th>
+                                <th style="border: solid 1px #999;">Verifiability</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Availability</th>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Efficiency</th>
+                                <td>+</td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>+</td>
+                                <td>-</td>
+                                <td></td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Installability</th>
+                                <td>+</td>
+                                <td></td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Integrity</th>
+                                <td></td>
+                                <td></td>
+                                <td>-</td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td>-</td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Interoperability</th>
+                                <td>+</td>
+                                <td></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td></td>
+                                <td>-</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td>-</td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Modifiability</th>
+                                <td>+</td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td></td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td>-</td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td>+</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Performance</th>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td>-</td>
+                                <td></td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Portability</th>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td></td>
+                                <td>+</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>+</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Reliability</th>
+                                <td>+</td>
+                                <td>-</td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td>-</td>
+                                <td></td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>+</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Reusability</th>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td>-</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>-</td>
+                                <td>+</td>
+                                <td></td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td>+</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Robustness</th>
+                                <td>+</td>
+                                <td>-</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Safety</th>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>-</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>+</td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td></td>
+                                <td>+</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Scalability</th>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Security</th>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Usability</th>
+                                <td></td>
+                                <td>-</td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Verifiability</th>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td></td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td></td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td class="dark-conflict-matrix-cell"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<script>
+
+    var tmpNFRsList = new Array();
+
+    function addNewNFR() {
+        var nfr = $("#addTxtNFR").val();
+
+        if (nfr === "") {
+            alert("Insert Mandatory Fields!!!");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/NFRs/AddNFR",
+            data: "{'nfr': '" + nfr + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    $("#addTxtNFR").val("");
+                    getNFRsList();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getNFRsList() {
+        var nfr = $("#srchTxtNFR").val();
+
+        $("#nfrlTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/NFRs/GetNFRsList",
+            data: "{'nfr': '" + nfr + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                tmpNFRsList = new Array();
+                var lastI = -1;
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                        lastI++;
+                        tmpNFRsList[i] = { "ID": dataObject.returnedObject[i].ID, "NFR": dataObject.returnedObject[i].NFR, "isSysNFR": true };
+                        $("#nfrlTableBody").append("<tr><th scope= 'row'>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].NFR + "</td> " +
+                            "<td>System NFR</td> " +
+                            "<td><button class='btn btn-sm btn-primary' onclick='updateNFR(" + i + ");'>Update</button> <button onclick='deleteNFR(" + i + ");' class='btn btn-sm btn-danger'>Delete</button></td>" +
+                            "</tr>");
+                    }
+                    for (var i = 0; i < dataObject.extraObject.length; i++) {
+
+                        tmpNFRsList[i + lastI + 1] = { "ID": dataObject.extraObject[i].ID, "NFR": dataObject.extraObject[i].NFR, "isSysNFR": false };
+                        $("#nfrlTableBody").append("<tr><th scope= 'row'>" + dataObject.extraObject[i].ID + "</th>" +
+                            "<td>" + dataObject.extraObject[i].NFR + "</td> " +
+                            "<td>Added By User</td> " +
+                            "<td><button class='btn btn-sm btn-primary' onclick='updateNFR(" + (i + lastI + 1) + ");'>Update</button> <button onclick='deleteNFR(" + (i + lastI + 1) + ");' class='btn btn-sm btn-danger'>Delete</button></td>" +
+                            "</tr>");
+                    }
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function updateNFR(index) {
+        var nfrID = tmpNFRsList[index].ID;
+        var nfrText = tmpNFRsList[index].NFR;
+        var isSysNFR = tmpNFRsList[index].isSysNFR;
+
+        let updatedNFR = prompt("Modify The NFR Name Below:", nfrText);
+        if (updatedNFR == null || updatedNFR == "" || updatedNFR == nfrText) {
+            return;
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/NFRs/UpdateNFR",
+                data: "{'nfrID':" + nfrID + ", 'newNfrText':'" + updatedNFR + "', 'isSysNFR': " + isSysNFR + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "JSON",
+                success: function (dataObject) {
+                    if (dataObject.successFlag) {
+                        alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                        getNFRsList();
+                    } else {
+                        alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        }
+    }
+
+    function deleteNFR(index) {
+        var nfrID = tmpNFRsList[index].ID;
+        var nfrText = tmpNFRsList[index].NFR;
+        var isSysNFR = tmpNFRsList[index].isSysNFR;
+
+        let deletedNFR = confirm("Confirm Deleting The NFR:\n\"" + nfrText + "\" With The ID \"" + nfrID + "\"");
+        if (!deletedNFR) {
+            return;
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/NFRs/DeleteNFR",
+                data: "{'nfrID':" + nfrID + ", 'isSysNFR': " + isSysNFR + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "JSON",
+                success: function (dataObject) {
+                    if (dataObject.successFlag) {
+                        alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                        getNFRsList();
+                    } else {
+                        alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        }
+    }
+
+    $('document').ready(function () {
+        $('.nav a').removeClass("active");
+        $('#navItemNFRs').addClass("active");
+
+        getNFRsList();
+    });
+</script>

@@ -1,0 +1,456 @@
+
+body {
+    /*background: url('/Images/rm31-aom-003-wood_2.jpg');*/
+    /*background: linear-gradient(to bottom, rgba(100, 100, 100, 0.12), rgba(0, 0, 0, 0.53)), 
+        url('../Images/bg4.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;*/
+}
+
+html {
+	overflow: hidden;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height:5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background:rgba(255,255,255,0.02); 
+    border-radius: 2px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #666; 
+    background: linear-gradient(to top, rgba(0,0,0,.3),rgba(255,255,255,0.1));
+    border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to top, rgba(0,0,0,.7),rgba(255,255,255,0.2));
+}
+
+/* general */
+
+.mandatoryStar {
+    color:red;
+    margin: 0 5px 0 0;
+}
+fieldset {
+    border: solid 1px #999;
+    border-radius: 20px;
+}
+legend {
+    height: auto;
+    margin-left:40px;
+    padding: 0 10px;
+    width:auto;
+    font-family:monospace;
+    font-size: 18px;
+    background: linear-gradient(to top, rgba(150,150,150,0.2),rgba(255,255,255,0.0));
+    border-radius: 20px;
+    cursor: default;
+}
+/* table rows counter */
+/*
+table {
+    counter-reset: row-num;
+}
+table tbody tr {
+  counter-increment: row-num;
+  position:relative;
+}
+table tbody tr th:first-child::before {
+    content: " " counter(row-num);
+    position:absolute;
+    top:30%;
+    left:5px;
+    color: rgba(150,150,150,0.4);
+    font-family:monospace;
+    font-size:12px;
+}*/
+table thead tr {
+    background: linear-gradient(to bottom, rgba(0, 105, 128, 0.2), rgba(138, 159, 164, 0.1), rgba(255, 255, 255, 0.0));
+}
+table tr{
+    text-align: center;
+}
+.blackTable{
+    border-collapse: separate;
+    margin:20px 0px;
+}
+.blackTable tbody th,.blackTable tbody td, .blackTable th {
+    border: solid 1px #999;
+    border-color: #999;
+    outline-color: #333;
+    white-space: nowrap;
+}
+.blackTable th{
+    font-size: 12px;
+}
+    .blackTable td {
+        font-size: 18px;
+    }
+.blackTable thead th:first-child,.blackTable tbody th:first-child{
+    white-space: nowrap;
+    position: sticky;
+    width: 5em;
+    left: 0;
+    top: auto;
+    background:white;
+}
+.dark-conflict-matrix-cell {
+    background: rgba(150,150,150,0.15);
+}
+label {
+    font-size: 14px;
+}
+
+.Table-Pagination {
+    width:auto;
+    font-family: monospace;
+    font-size:12px;
+    padding: 0;
+}
+.TP-Row div {
+    display: inline-block;
+}
+.TP-PageIndex-Container {
+    color: #666;
+}
+.TP-PageIndex-Container label{
+    color: #666;
+    font-size:12px;
+}
+.TP-PageIndex-Container select{
+    border: solid 1px rgba(0, 105, 128, 0.4);
+    border-radius: 5px;
+    outline: none;
+    padding: 0 3px;
+    color: #888;
+}
+.TP-IPP-Container {
+    color: #666;
+}
+.TP-IPP-Container label{
+    color: #666;
+    font-size:12px;
+}
+.TP-IPP-Container select{
+    border: solid 1px rgba(0, 105, 128, 0.4);
+    border-radius: 5px;
+    outline: none;
+    padding: 0 3px;
+    color: #888;
+}
+.my-custom-file-input ~ .custom-file-label::after {
+    height: 30px;
+}
+/* general */
+
+/********************** Input Tags Styling ***********************/
+/* bootstrap-tagsinput.css file - add in local */
+
+.bootstrap-tagsinput {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    padding: 4px 6px;
+    color: #555;
+    vertical-align: middle;
+    border-radius: 5px;
+    max-width: 100%;
+    line-height: 22px;
+    cursor: text;
+}
+.bootstrap-tagsinput input {
+  display: inline-block;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0px 6px;
+  margin: 0;
+  width: auto;
+  max-width: inherit;
+}
+.bootstrap-tagsinput.form-control input::-moz-placeholder {
+  color: #777;
+  opacity: 1;
+}
+.bootstrap-tagsinput.form-control input:-ms-input-placeholder {
+  color: #777;
+}
+.bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
+  color: #777;
+}
+.bootstrap-tagsinput input:focus {
+  border: none;
+  box-shadow: none;
+}
+.bootstrap-tagsinput .tag {
+    display:inline-block;
+    margin-bottom:1px;
+  margin-right: 0px;
+  color: white;
+  background-color: rgba(50,150,200,0.7);
+  padding: 0px 0px 0px 5px;
+  border-radius:5px;
+    cursor:pointer;
+}
+.bootstrap-tagsinput .tag [data-role="remove"] {
+  margin-left: 8px;
+  cursor: pointer;
+  color:#eee;
+  height:100%;
+  padding: 0 5px 5px 5px;
+  border-radius:5px;
+}
+.bootstrap-tagsinput .tag:hover{
+  background-color: rgba(50,150,200,1);
+}
+.bootstrap-tagsinput .tag [data-role="remove"]:after {
+  content: "x";
+  padding: 0px 2px;
+}
+.bootstrap-tagsinput .tag [data-role="remove"]:hover {
+  box-shadow: inset 0 0px 4px rgba(255, 255, 255, 0.9), 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: white;
+}
+.bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+/********************** Input Tags Styling ***********************/
+
+/*  nav  */
+#navMainCont {
+    background: linear-gradient(to top, #1D4457, black);
+    /*min-height: 5.7vh;*/
+    height: 60px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0px 0px 10px 1px black;
+}
+#navLogo h2 {
+    cursor: pointer;
+    font-size: 40px;
+    transition: .3s;
+}
+#navLogo:hover h2 {
+    cursor: pointer;
+    color:white;
+    font-size: 42px;
+}
+#navItems a{
+    color:#ddd;
+    transition: .5s;
+}
+#navItems a.active{
+    color:#fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+#navItems a:hover{
+    color:#fff;
+    font-size: 18px;
+}
+.loggedinUserNavItem{
+    background:transparent;
+    width:50px;height:50px;
+    border-radius: 100%;
+    outline:none;
+    border: solid 1px grey;
+    margin-top:5px;
+    box-shadow: 0px 0px 10px black;
+    transition: 0.3s;
+}
+.loggedinUserNavItem:hover{
+    box-shadow: 0px 5px 10px black;
+}
+/*  nav  */
+/* content */
+#pageContent{
+    background:linear-gradient(to top, #ddd,#fff,rgba(255,255,255,0));
+    height:94.3vh;
+    overflow-y: auto;
+}
+
+#ProjectsList{
+    height:100%;
+    border-radius: 13px;
+    text-align: center;
+    overflow-y: auto;
+}
+#ProjectComponents{
+    height:100%;
+    border-radius: 13px;
+    text-align: center;
+    overflow-y: auto;
+}
+#psTitle{
+    margin:0;padding:0 30%;
+    background: linear-gradient(to top, rgba(150,150,150,0.2),rgba(255,255,255,0.0));
+    border-radius: 20px;position:relative;
+}
+#pcTitle {
+    margin: 0 auto;
+    padding: 0 20%;
+    background: linear-gradient(to top, rgba(150,150,150,0.2),rgba(255,255,255,0.0));
+    border-radius: 20px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#psLinks{
+    padding: 0 20px;
+}
+ul{
+    padding: 0;
+    text-align: center;
+}
+#psLinks li {
+    width: 100%;
+    list-style-type: none;
+    margin: 10px auto 40px auto;
+    font-size: 14px;
+    background: linear-gradient(to bottom, rgba(150,150,150,0.09),white, rgba(255,255,255,0.0));
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding-top: 10px;
+    min-height: 35px;
+    cursor: pointer;
+    position: relative;
+    transition: .3s;
+}
+#pcLinks li{
+    width:100%;
+    list-style-type: none;
+    margin: 10px auto 38px auto;
+    font-size: 16px;
+    background:linear-gradient(to bottom, rgba(150,150,150,0.09),white, rgba(255,255,255,0.0));
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding-top: 10px;
+    min-height: 35px;
+    cursor: pointer;position: relative;
+    transition:.3s;
+}
+#psLinks a {
+    color: #999;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#psLinks a:hover{
+    color:#555;
+}
+#pcLinks a{
+    color:#59b;
+    text-decoration: none;
+    width:100%;
+    height:100%;
+    display: inline-block;
+    position: absolute;
+    left:0;
+    top:0;
+    transition: 0.3s;
+}
+#pcLinks li:hover a{
+    color:#4ad;
+    font-weight: bold;
+    font-size: 17px;
+    text-decoration: underline;
+}
+#pcLinks .active{
+    color:#4ad;
+    font-weight: bold;
+    font-size: 17px;
+    text-decoration: underline;
+}
+#psLinks li:hover{
+    width:100%;
+    font-size: 16px;
+}
+#pcLinks li:hover{
+    background:linear-gradient(to bottom, white,rgba(150,150,150,0.09), rgba(255,255,255,0.0));
+}
+#addProjFromHome{
+    color:dodgerblue;
+    opacity: 0.4;position: absolute;
+    right:10px;top:6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+#addProjFromHome:hover{
+   font-size: 18px; 
+    opacity: 0.7;
+}
+.nfr-us-input,.standard-us-input{
+    display: none;
+}
+.gi-display-field {
+    padding-left:5px;
+}
+#General-InfoContentDiv strong {
+    font-size:14px;
+}
+#uusPanelContainer, #utkPanelContainer {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.25);
+    z-index: 99999;
+}
+#uusPanel, #utkPanel {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    min-height: 400px;
+    left: 15%;
+    top: 15%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px black;
+}
+#uusPanel .panel-title,#utkPanel  .panel-title {
+    position:absolute;
+    width:30%;
+    left:0;
+    background:rgba(0,0,0,0.0);
+    padding:20px;
+    min-width: 300px;
+    font-size: 24px;
+    color:#333;
+    font-weight:500;
+}
+#uusPanel .fa-close, #utkPanel .fa-close {
+    position:absolute;
+    right:0;
+    margin:15px;
+    font-size:20px;
+    color:grey;
+    cursor:pointer;
+    transition:0.3s;
+}
+#uusPanel .fa-close:hover, #utkPanel .fa-close:hover{
+    color:#222;
+}
+/* content */

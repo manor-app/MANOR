@@ -1,0 +1,1350 @@
+﻿
+@{
+    ViewBag.Title = "Projectpage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0" id="pageContent">
+    <div class="row" style="height:100%;">
+        <div class="col-md-3" style="height:100%;padding: 50px 0px 50px 50px;">
+            <fieldset class="col-md-12" id="ProjectComponents" style="height: 100%;">
+                <legend class="" id="pcTitle">PROJECT NAME</legend>
+                <div class="col-md-12" id="pcLinks">
+                    <ul>
+                        <li><a class="active">General-Info</a></li>
+                        <li><a>Modules</a></li>
+                        <li><a>Epics</a></li>
+                        <li><a>NFRs</a></li>
+                        <li><a>Sprints</a></li>
+                        <li><a>User-Stories</a></li>
+                        <li><a>Product-Backlog</a></li>
+                    </ul>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-md-9 p-5" style="height:100%;">
+            <fieldset style="height:100%;">
+                <legend id="ComponentContentTitle">General-Info</legend>
+                <div class="col-md-12 p-4 contentDiv" style="height: 100%;overflow-y: auto;" id="General-InfoContentDiv">
+                    <div class="row p-3">
+                        <div class="col-md-4">
+                            <strong>Customer:<small id="display-g-i-CustomerName" class="gi-display-field"></small></strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Customer Phone:<small id="display-g-i-CustomerPhone" class="gi-display-field"></small></strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Customer Email:<small id="display-g-i-CustomerEmail" class="gi-display-field"></small></strong>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-md-4">
+                            <strong>Project ID:<small id="display-g-i-ProjectID" class="gi-display-field"></small></strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Project Name:<small id="display-g-i-ProjectName" class="gi-display-field"></small></strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Project Domain:<small id="display-g-i-ProjectDomain" class="gi-display-field"></small></strong>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-md-4">
+                            <strong>Start Date:<small id="display-g-i-StartDate" class="gi-display-field"></small></strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>End Date:<small id="display-g-i-EndDate" class="gi-display-field"></small></strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Status:<small id="display-g-i-ProjectStatus" class="gi-display-field"></small></strong>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-md-4">
+                            <strong>System Type:<small id="display-g-i-SystemType" class="gi-display-field"></small></strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Modules #:<small id="display-g-i-ModulesNum" class="gi-display-field"></small></strong>
+                        </div>
+
+                        <div class="col-md-4">
+                            <strong>NFRs #:<small> 9</small></strong>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-md-4">
+                            <strong>Sprints #:<small id="display-g-i-SprintsNum" class="gi-display-field"> 50</small></strong>
+                        </div>
+                        <div class="col-md-8">
+                            <strong>Description:<small id="display-g-i-ProjectDescription" class="gi-display-field"></small></strong>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="table-responsive p-3" style="max-height: 100%;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Assign Users</strong></p>
+                            </div>
+                            <div class="col-md-4 offset-md-2 text-right">
+                                <select onchange="getUsersList();" id="g-i-users-FilterFlag" class="form-control form-control-sm">
+                                    <option selected disabled value="0">Assigned / Unassigned / Both</option>
+                                    <option value="1">Assigned</option>
+                                    <option value="2">Unassigned</option>
+                                    <option value="3">Both</option>
+                                </select>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Fullname</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ulTableBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="col-md-12 p-4 contentDiv" style="height: 100%;overflow-y: auto;display: none;" id="ModulesContentDiv">
+                    <p style="margin:0;"><strong>Project Modules:</strong></p>
+                    <div class="table-responsive" style="max-height: 45%;">
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Domain</th>
+                                    <th scope="col">Module</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pmlTableBody">
+
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Telecommunication</td>
+                                    <td>IT</td>
+                                    <td><button class="btn btn-sm btn-danger">Remove</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Telecommunication</td>
+                                    <td>Sales</td>
+                                    <td><button class="btn btn-sm btn-danger">Remove</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Telecommunication</td>
+                                    <td>Business Control</td>
+                                    <td><button class="btn btn-sm btn-danger">Remove</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr>
+
+                    <p style="margin:0;"><strong>Modules List:</strong></p>
+                    <div class="table-responsive" style="max-height: 45%;">
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Domain</th>
+                                    <th scope="col">Module</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mlTableBody">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>E-commerce</td>
+                                    <td>HR</td>
+                                    <td><button class="btn btn-sm btn-secondary">Assign</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Manufacturing</td>
+                                    <td>Sales</td>
+                                    <td><button class="btn btn-sm btn-secondary">Assign</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Telecommunication</td>
+                                    <td>IT</td>
+                                    <td><button disabled class="btn btn-sm btn-secondary">Assign</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Telecommunication</td>
+                                    <td>Sales</td>
+                                    <td><button disabled class="btn btn-sm btn-secondary">Assign</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>Telecommunication</td>
+                                    <td>Business Control</td>
+                                    <td><button disabled class="btn btn-sm btn-secondary">Assign</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6</th>
+                                    <td>Logistics and Supply Chain</td>
+                                    <td>Sales</td>
+                                    <td><button class="btn btn-sm btn-secondary">Assign</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="col-md-12 p-4 contentDiv" style="height: 100%;overflow-y: auto;display: none;" id="EpicsContentDiv">
+                    <p style="margin:0;"><strong>Project Epics:</strong></p>
+                    <div class="table-responsive" style="max-height: 45%;">
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Epic</th>
+                                    <th scope="col">Module</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="elTableBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr>
+
+                    <p style="margin:0;"><strong>Create Epic:</strong></p>
+                    <hr style="width: 15%;position: relative;left:0;text-align: left;margin:10px 0;">
+                    <div class="col-md-12" style="height: auto;">
+                        <div class="row p-4">
+                            <div class="col-md-4 offset-md-1">
+                                <label><span class="mandatoryStar">*</span>Epic Name:</label>
+                                <input id="add-epic-Name" type="text" class="form-control form-control-sm epic-mandatory-field add-epic-input-txt" placeholder="Epic 1, Epic 2 .. etc" />
+                            </div>
+                            <div class="col-md-3">
+                                <label><span class="mandatoryStar">*</span>Module:</label>
+                                <select id="add-epic-Module" class="form-control form-control-sm epic-mandatory-field add-epic-input-ddm"></select>
+                            </div>
+
+                            <div class="col-md-4 p-0" style="position: relative;">
+                                <button onclick="createNewEpic();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 21%;">Submit</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-12 p-4 contentDiv" style="height: 100%;overflow-y: auto;display: none;" id="NFRsContentDiv">
+
+                    <div class="row p-1" style="height: 50%;">
+                        <div class="table-responsive col-md-6" style="max-height: 100%;">
+                            <p><strong>Project NFRs:</strong></p>
+                            <table class="table table-bordered table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">NFR Name</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pnfrlTableBody">
+
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Usability</td>
+                                        <td><button class="btn btn-sm btn-secondary">Unassign</button></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Serviceability</td>
+                                        <td><button class="btn btn-sm btn-secondary">Unassign</button></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Manageability</td>
+                                        <td><button class="btn btn-sm btn-secondary">Unassign</button></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Recoverability</td>
+                                        <td><button class="btn btn-sm btn-secondary">Unassign</button></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive col-md-6" style="max-height: 100%;">
+                            <p><strong>Application NFRs:</strong></p>
+                            <table class="table table-bordered table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">NFR Name</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody  id="anfrlTableBody">
+
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Capacity</td>
+                                        <td><button class="btn btn-sm btn-primary">Assign</button></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Availability</td>
+                                        <td><button class="btn btn-sm btn-primary">Assign</button></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Scalability</td>
+                                        <td><button class="btn btn-sm btn-primary">Assign</button></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Interoperability</td>
+                                        <td><button class="btn btn-sm btn-primary">Assign</button></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row p-1" style="height: 50%;">
+                        <div class="col-md-12 text-center"><h4>Recommended NFRs</h4><hr class="col-md-6"></div>
+                        <div class="table-responsive col-md-6" style="max-height: 100%;">
+                            <p><strong>Predefined:</strong></p>
+                            <table class="table table-bordered table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">NFR Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Usability</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Serviceability</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Manageability</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Recoverability</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive col-md-6" style="max-height: 100%;">
+                            <p><strong>Previous Projects:</strong></p>
+                            <table class="table table-bordered table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">NFR Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Capacity</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Availability</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Scalability</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Interoperability</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 p-4 contentDiv" style="height: 100%;overflow-y: auto;display: none;" id="SprintsContentDiv">
+                    <p style="margin:0;"><strong>Project Sprints:</strong></p>
+                    <div class="table-responsive" style="max-height: 45%;">
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Sprint</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Goal</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slTableBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr>
+
+                    <p style="margin:0;"><strong>Create Sprint:</strong></p>
+                    <hr style="width: 15%;position: relative;left:0;text-align: left;margin:10px 0;">
+                    <div class="col-md-12" style="height: auto;">
+                        <div class="row p-2">
+                            <div class="col-md-3 offset-md-1">
+                                <label><span class="mandatoryStar">*</span>Sprint Name:</label>
+                                <input  id="add-sprint-Name" type="text" class="form-control form-control-sm sprint-add-field sprint-mandatory-field add-sprint-input-txt" placeholder="Sprint 1, Sprint 2 .. etc" />
+                            </div>
+                            <div class="col-md-3">
+                                <label><span class="mandatoryStar">*</span>Start Date:</label>
+                                <input id="add-sprint-StartDate" type="date" class="form-control form-control-sm sprint-add-field sprint-mandatory-field add-sprint-input-dt" placeholder="12-9-2021 .. etc" />
+                            </div>
+                            <div class="col-md-3">
+                                <label><span class="mandatoryStar">*</span>End Date:</label>
+                                <input  id="add-sprint-EndDate" type="date" class="form-control form-control-sm sprint-add-field sprint-mandatory-fieldadd-sprint-input-dt" placeholder="12/4/2021 .. etc" />
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-4 offset-md-1 text-left">
+                                <label>Sprint Goal:</label>
+                                <textarea id="add-sprint-Goal" rows="1" class="form-control form-control-sm sprint-add-field add-sprint-input-txt" placeholder="Some goal text here..."></textarea>
+                            </div>
+                            <div class="col-md-2">
+                                <label><span class="mandatoryStar">*</span>Status</label>
+                                <select id="add-sprint-Status" class="form-control form-control-sm sprint-add-field sprint-mandatory-field add-sprint-input-ddm"></select>
+                            </div>
+                            <div class="col-md-4 p-0" style="position: relative;">
+                                <button onclick="createNewSprint();" class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 21%;">Submit</button>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 p-4 contentDiv" style="height: 100%;overflow-y: auto;display: none;" id="User-StoriesContentDiv">
+                    <div class="table-responsive p-3" style="max-height: 100%;">
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label>User-Story ID</label>
+                                <input type="text" placeholder="123-cb-24, 123, ..... etc" class="form-control form-control-sm" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Module</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select Module</option>
+                                    <option>It</option>
+                                    <option>Sales</option>
+                                    <option>HR</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Created By</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select User</option>
+                                    <option>Amr Megahed</option>
+                                    <option>Tamer Samir</option>
+                                    <option>Ahmed Rashwan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label>Sprint</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select Module</option>
+                                    <option>Sprint 1</option>
+                                    <option>Sprint 2</option>
+                                    <option>Sprint 3</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Status</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select Module</option>
+                                    <option>Done</option>
+                                    <option>Pending</option>
+                                    <option>In-Progress</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <button class="btn btn-success btn-sm" style="width:50%;float:right;position: relative;bottom: -30px;">Search</button>
+                            </div>
+                        </div>
+                        <br>
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Created By</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>EEEE</td>
+                                    <td>Done</td>
+                                    <td>Ezeldin sherif</td>
+                                    <td><button class="btn btn-sm btn-secondary">Update</button> <button class="btn btn-sm btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>EEEE</td>
+                                    <td>Pending</td>
+                                    <td>Ahmed sherif</td>
+                                    <td><button class="btn btn-sm btn-secondary">Update</button> <button class="btn btn-sm btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>EEEE</td>
+                                    <td>Done</td>
+                                    <td>Ezeldin sherif</td>
+                                    <td><button class="btn btn-sm btn-secondary">Update</button> <button class="btn btn-sm btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>EEEE</td>
+                                    <td>Pending</td>
+                                    <td>Ibrahim sherif</td>
+                                    <td><button class="btn btn-sm btn-secondary">Update</button> <button class="btn btn-sm btn-danger">Delete</button></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="col-md-12">
+                        <div class="com-md-12 text-center">
+                            <h4>Add New User Story</h4>
+                            <hr style="width: 50%;">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Module</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select Module</option>
+                                    <option>IT</option>
+                                    <option>Sales</option>
+                                    <option>HR</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Priority</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select Priority</option>
+                                    <option>P1</option>
+                                    <option>P2</option>
+                                    <option>P3</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Type Of Requirement</label>
+                                <select id="ddmReqType" onchange="handleReqTypeInputes($(this).val());" class="form-control form-control-sm">
+                                    <option selected>FR</option>
+                                    <option>NFR</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Assigned To</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select User</option>
+                                    <option>Amr</option>
+                                    <option>Ahmed</option>
+                                    <option>mustafa</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Assign To Sprint</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select Sprint</option>
+                                    <option>Sprint 1</option>
+                                    <option>Sprint 2</option>
+                                    <option>Sprint 3</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Status</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select Status</option>
+                                    <option>Done</option>
+                                    <option>Pending</option>
+                                    <option>In-Progress</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label class="custom-us-input nonestandard-us-input">Custom User Story</label>
+                                <label class="nfr-us-input">Description</label>
+                                <label class="standard-us-input">Acceptance Criteria</label>
+                                <textarea rows="1" class="form-control form-control-sm custom-us-input nonestandard-us-input" placeholder="your story here..."></textarea>
+                                <textarea rows="1" class="form-control form-control-sm nfr-us-input" placeholder="your description here..."></textarea>
+                                <textarea rows="1" class="form-control form-control-sm standard-us-input" placeholder="your acceptance criteria here..."></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Attachment</label>
+                                <input type="file" class="form-control form-control-sm" />
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="custom-us-input">Type Of U.S</label>
+                                <label class="nfr-us-input">Pos/Neg U.S</label>
+                                <select id="ddmUsType" onchange="handleUSTypeInputes($(this).val());" class="form-control form-control-sm custom-us-input">
+                                    <option selected>Custom</option>
+                                    <option>Standard</option>
+                                </select>
+                                <select class="form-control form-control-sm nfr-us-input">
+                                    <option selected>Positive</option>
+                                    <option>Negative</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="custom-us-input">Related To</label>
+                                <label class="nfr-us-input">Related To</label>
+                                <select class="form-control form-control-sm custom-us-input">
+                                    <option selected disabled>Select Relation</option>
+                                    <option>Epic</option>
+                                    <option>Function U.S</option>
+                                </select>
+                                <select class="form-control form-control-sm nfr-us-input">
+                                    <option selected disabled>Select Relation</option>
+                                    <option>System</option>
+                                    <option>Module</option>
+                                    <option>Epic</option>
+                                    <option>Function U.S</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Epic Name</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select Epic</option>
+                                    <option>Epic 1</option>
+                                    <option>Epic 2</option>
+                                    <option>Epic 3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="standard-us-input">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Title</label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="some title.." />
+                                </div>
+                                <div class="col-md-3">
+                                    <label>As a</label>
+                                    <input type="text" class="form-control form-control-sm" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label>I wish</label>
+                                    <input type="text" class="form-control form-control-sm" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label>So that</label>
+                                    <input type="text" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4 text-right custom-us-input">
+                            </div>
+                            <div class="col-md-4 nfr-us-input">
+                                <label>NFR Type</label>
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select NFR</option>
+                                    <option>Usability</option>
+                                    <option>Scaleablity</option>
+                                    <option>Security</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Function (US)</label>
+                                <input type="search" class="form-control form-control-sm" style="border-radius: 20px;display: inline-block;width:90%;" placeholder="Search ..."><i style="margin-left: 5px; color:dodgerblue;" class="fa fa-plus"></i>
+                            </div>
+                            <div class="col-md-4 text-left">
+                                <br>
+                                <button class="btn btn-success btn-sm" style="width:30%;margin-top:5px;">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 p-4 contentDiv" style="height: 100%;overflow-y: auto;display: none;" id="Product-BacklogContentDiv">
+                    <p style="margin:0;"><strong>Unassigned User Stories:</strong></p>
+                    <hr style="width: 20%;position: relative;left:0;text-align: left;margin:10px 0;">
+                    <div class="row p-3">
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" style="margin-right: 20px;">U.S Lind To Sprints</label>
+                                <input onchange="if($(this).is(':checked'))$('#pblSearchSprintList').prop('disabled',false);" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="All" checked>
+                                <label class="form-check-label" for="inlineCheckbox1">All</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input onchange="if($(this).is(':checked'))$('#pblSearchSprintList').prop('disabled',false);" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Yes">
+                                <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input onchange="if($(this).is(':checked'))$('#pblSearchSprintList').prop('disabled',true);" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="No">
+                                <label class="form-check-label" for="inlineCheckbox1">No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2 offset-md-4 text-right">
+                            <select id="pblSearchSprintList" class="form-control form-control-sm" style="font-size: 13px;">
+                                <option selected disabled>Select Sprint</option>
+                                <option>Sprint 1</option>
+                                <option>Sprint 2</option>
+                                <option>Sprint 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive" style="max-height: 45%;">
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Select</th>
+                                    <th scope="col">U.S Title</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Assigned To</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td><input type="checkbox"></td>
+                                    <td>U.S 1</td>
+                                    <td>Done</td>
+                                    <td>Sprint 1</td>
+                                    <td><button class="btn btn-sm btn-secondary">View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td><input type="checkbox"></td>
+                                    <td>U.S 2</td>
+                                    <td>Open</td>
+                                    <td>Sprint 1</td>
+                                    <td><button class="btn btn-sm btn-secondary">View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td><input type="checkbox"></td>
+                                    <td>U.S 3</td>
+                                    <td>Done</td>
+                                    <td>Sprint 3</td>
+                                    <td><button class="btn btn-sm btn-secondary">View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td><input type="checkbox"></td>
+                                    <td>U.S 4</td>
+                                    <td>Open</td>
+                                    <td>Sprint 3</td>
+                                    <td><button class="btn btn-sm btn-secondary">View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td><input type="checkbox"></td>
+                                    <td>U.S 5</td>
+                                    <td>Done</td>
+                                    <td>Sprint 4</td>
+                                    <td><button class="btn btn-sm btn-secondary">View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6</th>
+                                    <td><input type="checkbox"></td>
+                                    <td>U.S 6</td>
+                                    <td>Done</td>
+                                    <td>Sprint 5</td>
+                                    <td><button class="btn btn-sm btn-secondary">View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr>
+
+                    <p style="margin:0;"><strong>Assign Selected U.S To Sprints:</strong></p>
+                    <hr style="width: 20%;position: relative;left:0;text-align: left;margin:10px 0;">
+                    <div class="col-md-12" style="height: auto;">
+                        <div class="row p-4">
+                            <div class="col-md-3 offset-md-1 text-right">
+                                <label>Choose Sprint:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control form-control-sm">
+                                    <option selected disabled>Select Sprint</option>
+                                    <option>Sprint 1</option>
+                                    <option>Sprint 2</option>
+                                    <option>Sprint 3</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-2 p-0" style="position: relative;">
+                                <button class="btn btn-success btn-sm" style="position: absolute;bottom: 0;width: 50%;margin-left: 21%;">Assign</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var projectID = @ViewBag.ProjectID;
+
+    function assignAndUnassignUserToProject(isAssign, userID) {
+        $.ajax({
+            type: "POST",
+            url: "/Project/AssignUnAssignUserToProject",
+            data: "{'assignFlag': " + isAssign + ",'userID': " + userID + ", 'projectID':" + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    getUsersList();
+                } else {
+                    alert("Status: " + dataObject.status + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function assignAndUnassignModuleToProject(isAssign, moduleID) {
+        $.ajax({
+            type: "POST",
+            url: "/Project/AssignUnAssignModuleToProject",
+            data: "{'assignFlag': " + isAssign + ",'moduleID': " + moduleID + ", 'projectID':" + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    getModulesList();
+                } else {
+                    alert("Status: " + dataObject.status + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function assignAndUnassignNFRToProject(isAssign, nfr) {
+        $.ajax({
+            type: "POST",
+            url: "/NFRs/AssignUnAssignNFRToProject",
+            data: "{'assignFlag': " + isAssign + ",'nfr': '" + nfr + "', 'projectID':" + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    getNFRs();
+                } else {
+                    alert("Status: " + dataObject.status + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getUsersList() {
+        var filterVal = $("#g-i-users-FilterFlag").val();
+
+        $("#ulTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Project/GetUsersList",
+            data: "{'filterVal': " + filterVal + ", 'projectID':" + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        $("#ulTableBody").append("<tr><th scope= 'row'>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].Email + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Fullname + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Title + "</td> " +
+                            "<td><button class='btn btn-sm btn-danger' onclick='assignAndUnassignUserToProject(false," + dataObject.returnedObject[i].ID +");'>Unassign</button></td>" +
+                            "</tr>");
+                    }
+                    for (var i = 0; i < dataObject.extraObject.length; i++) {
+
+                        $("#ulTableBody").append("<tr><th scope= 'row'>" + dataObject.extraObject[i].ID + "</th>" +
+                            "<td>" + dataObject.extraObject[i].Email + "</td> " +
+                            "<td>" + dataObject.extraObject[i].Fullname + "</td> " +
+                            "<td>" + dataObject.extraObject[i].Title + "</td> " +
+                            "<td><button class='btn btn-sm btn-secondary' onclick='assignAndUnassignUserToProject(true," + dataObject.extraObject[i].ID + ");'>Assign</button></td>" +
+                            "</tr>");
+                    }
+                } else {
+                    alert("Status: " + dataObject.status + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getModulesList() {
+
+        $("#pmlTableBody").html("");
+        $("#mlTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Modules/GetProjectModules",
+            data: "{'projectID':" + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        $("#mlTableBody").append("<tr><th scope= 'row'>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].Domain + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Module + "</td> " +
+                            "<td><button disabled class='btn btn-sm btn-secondary'>Assign</button></td>" +
+                            "</tr>");
+
+                        $("#pmlTableBody").append("<tr><th scope= 'row'>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].Domain + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Module + "</td> " +
+                            "<td><button class='btn btn-sm btn-danger' onclick='assignAndUnassignModuleToProject(false," + dataObject.returnedObject[i].ID +");'>Remove</button></td>" +
+                            "</tr>");
+                    }
+                    for (var i = 0; i < dataObject.extraObject.length; i++) {
+                        $("#mlTableBody").append("<tr><th scope= 'row'>" + dataObject.extraObject[i].ID + "</th>" +
+                            "<td>" + dataObject.extraObject[i].Domain + "</td> " +
+                            "<td>" + dataObject.extraObject[i].Module + "</td> " +
+                            "<td><button class='btn btn-sm btn-secondary' onclick='assignAndUnassignModuleToProject(true," + dataObject.extraObject[i].ID +");'>Assign</button></td>" +
+                            "</tr>");
+                    }
+                } else {
+                    alert("Status: " + dataObject.status + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getGeneralInfo(projID) {
+
+        $.ajax({
+            type: "POST",
+            url: "/Project/GetSpecificProject",
+            data: "{'projID':" + projID+"}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+
+                $('#display-g-i-CustomerName').text((dataObject.returnedObject.CustomerName == null ? "-" : dataObject.returnedObject.CustomerName));
+                $('#display-g-i-CustomerPhone').text((dataObject.returnedObject.CustomerPhone == null ? "-" : dataObject.returnedObject.CustomerPhone));
+                $('#display-g-i-CustomerEmail').text((dataObject.returnedObject.CustomerEmail == null ? "-" : dataObject.returnedObject.CustomerEmail));
+                $('#display-g-i-ProjectID').text(dataObject.returnedObject.ID);
+                $('#display-g-i-ProjectName').text(dataObject.returnedObject.Name);
+                $('#display-g-i-ProjectDomain').text(dataObject.returnedObject.Domain);
+                $('#display-g-i-StartDate').text((dataObject.returnedObject.StartDate == null ? "-" : dataObject.returnedObject.StartDate));
+                $('#display-g-i-EndDate').text((dataObject.returnedObject.EndDate == null ? "-" : dataObject.returnedObject.EndDate));
+                $('#display-g-i-ProjectStatus').text(dataObject.returnedObject.Status);
+                $('#display-g-i-SystemType').text(dataObject.returnedObject.SysType);
+                $('#display-g-i-ProjectDescription').text((dataObject.returnedObject.Description == null ? "-" : dataObject.returnedObject.Description));
+                $('#display-g-i-ModulesNum').text(dataObject.extraObject.moulesCount);
+                $('#display-g-i-SprintsNum').text(dataObject.extraObject.sprintsCount);
+
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+
+        getUsersList();
+    }
+
+    function getModulesContent(projID) {
+        getModulesList();
+    }
+
+    function getProjectSprints() {
+
+        $("#slTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Project/GetProjectSprints",
+            data: "{'projectID':" + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        $("#slTableBody").append("<tr><th scope= 'row'>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].Name + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].StartDate + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].EndDate + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Status + "</td> " +
+                            "<td>" + (dataObject.returnedObject[i].Goal == null ? "-" : dataObject.returnedObject[i].Goal) + "</td> " +
+                            "<td><button class='btn btn-sm btn-secondary'>Update</button> <button class='btn btn-sm btn-danger'>Delete</button></td>" +
+                            "</tr>");
+                    }
+                } else {
+                    alert("Status: " + dataObject.status + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function createNewSprint() {
+
+        var name = $("#add-sprint-Name").val();
+        var startDate = $("#add-sprint-StartDate").val();
+        var endDate = $("#add-sprint-EndDate").val();
+        var goal = $("#add-sprint-Goal").val();
+        var status = $("#add-sprint-Status").val();
+
+        var mandatoryInserted = true;
+        $('.s[rint-mandatory-field').each(function (i, obj) {
+            if ($(this).val() == "" || $(this).val() == null || $(this).val() == 0) {
+                mandatoryInserted = false;
+            }
+        });
+
+        if (!mandatoryInserted) {
+            alert("Please Insert Mandatory Fields!");
+            return;
+        }
+
+        if ((endDate < startDate || endDate == startDate) && (startDate != "" || endDate != "")) {
+            alert("End Date Must Be After Start Date!.");
+            return;
+        }
+
+        var sprintObject = new Array();
+
+        sprintObject[0] = {
+            "ID": 0,
+            "ProjectID": projectID,
+            "Name": name,
+            "StartDate": startDate,
+            "EndDate": endDate,
+            "Goal": goal,
+            "Status": status
+        }
+
+        var stringfiedSprintObject = JSON.stringify(sprintObject[0]);
+
+        $.ajax({
+            type: "POST",
+            url: "/Project/CreateNewSprint",
+            data: "{'sprint': " + stringfiedSprintObject + ", 'projectID': " + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    $('.add-sprint-input-txt').val("");
+                    $('.add-sprint-input-ddm').val(0);
+                    $('.add-sprint-input-dt').val(null);
+                    getProjectSprints();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getSprintsContent(projID) {
+        getStatus();
+        getProjectSprints();
+    }
+
+    function getProjectEpics() {
+
+        $("#elTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Project/GetProjectEpics",
+            data: "{'projectID':" + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        $("#elTableBody").append("<tr><th scope= 'row'>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].Name + "</td> " +
+                            "<td>" + dataObject.returnedObject[i].Module + "</td> " +
+                            "<td><button class='btn btn-sm btn-secondary'>Update</button> <button class='btn btn-sm btn-danger'>Delete</button></td>" +
+                            "</tr>");
+                    }
+                } else {
+                    alert("Status: " + dataObject.status + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function createNewEpic() {
+
+        var name = $("#add-epic-Name").val();
+        var module = $("#add-epic-Module").val();
+
+        var mandatoryInserted = true;
+        $('.epic-mandatory-field').each(function (i, obj) {
+            if ($(this).val() == "" || $(this).val() == null || $(this).val() == 0) {
+                mandatoryInserted = false;
+            }
+        });
+
+        if (!mandatoryInserted) {
+            alert("Please Insert Mandatory Fields!");
+            return;
+        }
+
+        var epicObject = new Array();
+
+        epicObject[0] = {
+            "ID": 0,
+            "ProjectID": projectID,
+            "Name": name,
+            "Module": module
+        }
+
+        var stringfiedEpicObject = JSON.stringify(epicObject[0]);
+
+        $.ajax({
+            type: "POST",
+            url: "/Project/CreateNewEpic",
+            data: "{'epic': " + stringfiedEpicObject + ", 'projectID': " + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    alert("Status: " + dataObject.status + "\nMessage: " + dataObject.successMsg + (dataObject.errorMsg == null ? "" : "\n" + dataObject.errorMsg));
+                    $('.add-epic-input-txt').val("");
+                    $('.add-epic-input-ddm').val(0);
+                    getProjectEpics();
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getEpicsContent(projID) {
+        getModules();
+        getProjectEpics();
+    }
+
+    function getNFRs() {
+        var nfr = "";
+
+        $("#pnfrlTableBody").html("");
+        $("#anfrlTableBody").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/NFRs/GetNFRsForProject",
+            data: "{'projectID': " + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        $("#pnfrlTableBody").append("<tr><th scope= 'row'>" + dataObject.returnedObject[i].ID + "</th>" +
+                            "<td>" + dataObject.returnedObject[i].NFR + "</td> " +
+                            "<td><button class='btn btn-sm btn-danger' onclick='assignAndUnassignNFRToProject(false,\"" + dataObject.returnedObject[i].NFR + "\");'>Unassign</button></td>" +
+                            "</tr>");
+                    }
+                    for (var i = 0; i < dataObject.extraObject.length; i++) {
+
+                        $("#anfrlTableBody").append("<tr><th scope= 'row'>" + dataObject.extraObject[i].ID + "</th>" +
+                            "<td>" + dataObject.extraObject[i].NFR + "</td> " +
+                            "<td><button class='btn btn-sm btn-primary' onclick='assignAndUnassignNFRToProject(true,\"" + dataObject.extraObject[i].NFR + "\");'>Assign</button></td>" +
+                            "</tr>");
+                    }
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getNFRsContent(projID) {
+        getNFRs();
+    }
+
+    function handleAjaxCalls(itemText) {
+        if (itemText == "General-Info")
+            getGeneralInfo(projectID);
+        if (itemText == "Modules")
+            getModulesContent(projectID);
+        if (itemText == "Epics")
+            getEpicsContent(projectID);
+        if (itemText == "NFRs")
+            getNFRsContent(projectID);
+        if (itemText == "Sprints")
+            getSprintsContent(projectID);
+    }
+
+    function getStatus(itemToSelect = null) {
+        $("#add-sprint-Status").html("");
+        $("#add-sprint-Status").append("<option selected disabled value='0'>Select Status</option>");
+        $.ajax({
+            type: "GET",
+            url: "/Project/GetStatus",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                    if (itemToSelect == dataObject.returnedObject[i].Status) {
+                        $("#add-sprint-Status").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Status + "</option>");
+                    } else {
+                        $("#add-sprint-Status").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Status + "</option>");
+                    }
+                }
+
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function getModules(itemToSelect = null) {
+        $("#add-epic-Module").html("");
+        $("#add-epic-Module").append("<option selected disabled value='0'>Select Module</option>");
+        $.ajax({
+            type: "POST",
+            url: "/Modules/GetModulesForEpic",
+            data: "{'projectID': " + projectID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                for (var i = 0; i < dataObject.returnedObject.length; i++) {
+                    if (itemToSelect == dataObject.returnedObject[i].Module) {
+                        $("#add-epic-Module").append("<option selected value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "-" + dataObject.returnedObject[i].Module + "</option>");
+                    } else {
+                        $("#add-epic-Module").append("<option value='" + dataObject.returnedObject[i].ID + "'>" + dataObject.returnedObject[i].Domain + "-" + dataObject.returnedObject[i].Module + "</option>");
+                    }
+                }
+
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    function handleReqTypeInputes(selectedVal) {
+        if (selectedVal == "NFR") {
+            $('.custom-us-input').hide();
+            $('.standard-us-input').hide();
+            $('.nfr-us-input').fadeIn();
+        } else {
+            $('.nfr-us-input').hide();
+            if ($('#ddmUsType').val() == "Custom") {
+                $('.custom-us-input').fadeIn();
+            } else {
+                $('.custom-us-input').fadeIn();
+                $('.nonestandard-us-input').hide();
+                $('.standard-us-input').fadeIn();
+            }
+        }
+    }
+
+    function handleUSTypeInputes(selectedVal) {
+        if (selectedVal == "Custom") {
+            $('.standard-us-input').hide();
+            $('.nonestandard-us-input').fadeIn();
+        } else {
+            $('.nonestandard-us-input').hide();
+            $('.standard-us-input').fadeIn();
+        }
+    }
+
+    $('document').ready(function () {
+        getGeneralInfo(projectID);
+        $('.nav a').removeClass("active");
+        $('#pcLinks li').click(function () {
+            if ($(this).children().eq(0).hasClass("active"))
+                return;
+            $('.contentDiv').hide();
+            handleAjaxCalls($(this).children().eq(0).text());
+            $('#' + ($(this).children().eq(0).text()) + "ContentDiv").fadeIn();
+            $('#ComponentContentTitle').text($(this).children().eq(0).text());
+            $('#pcLinks li a').removeClass("active");
+            $(this).children().eq(0).addClass("active");
+        });
+    });
+</script>
+

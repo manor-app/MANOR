@@ -1,0 +1,4 @@
+y axis in bar chart decimal will be removed
+remov project del btn from create proj page
+fe page el nfrs rename app nfrs to nfrs list
+none to all from dropdownlist in stat rep

@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-0" id="pageContent">
+    <div class="row" style="height:100%;">
+        <div class="col-md-3" style="height:100%;padding: 50px 0px 50px 50px;">
+            <fieldset class="col-md-12" id="ProjectsList">
+                <legend class="" id="psTitle">PROJECTS <i onclick="window.location = '/Project/CreateProject'" title="Create New Project" id="addProjFromHome" class="fa fa-plus"></i></legend>
+                <div class="col-md-12" id="psLinks">
+                    <ul id="homeProjectsList">
+                    </ul>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-md-9 p-5" style="height:100%;">
+            <fieldset style="height:50%;">
+                <legend>UPCOMING</legend>
+            </fieldset>
+            <fieldset style="height:50%;">
+                <legend>DASHBOARD</legend>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function getProjectsList() {
+        var name = "";
+        var domain = null;
+
+        $("#homeProjectsList").html("");
+
+        $.ajax({
+            type: "POST",
+            url: "/Project/GetProjectsList",
+            data: "{'name': '" + name + "', 'domain':" + domain + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "JSON",
+            success: function (dataObject) {
+                if (dataObject.successFlag) {
+                    for (var i = 0; i < dataObject.returnedObject.length; i++) {
+
+                        $("#homeProjectsList").append("<li><a href='/Project/ProjectPage?projectID=" + dataObject.returnedObject[i].ID+"'>" + dataObject.returnedObject[i].Name+"</a></li>");
+                    }
+                } else {
+                    alert("Status: " + dataObject.status + "\nError: " + dataObject.errorMsg);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
+
+    $('document').ready(function () {
+        $('.nav a').removeClass("active");
+        $('#navItemHome').addClass("active");
+        getProjectsList();
+    });
+</script>
+
